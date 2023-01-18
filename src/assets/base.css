@@ -2,5 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 * {
-  background-color: aqua;
+  background-color: #111827;
+  color: white;
+}
+/* hide scroll bar, keep its function */
+*{ 
+  -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+  display: none;
 }
