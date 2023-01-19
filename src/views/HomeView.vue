@@ -12,9 +12,9 @@ import { useAllcard } from '../state/allcard'
 
 </script>
 <script>
+
 export default defineComponent({
   setup() {
-
 
   },
   data() {
@@ -24,37 +24,26 @@ export default defineComponent({
       currentComponent3: null,
       currentComponent4: null,
       currentComponent5: null,
+      activeCard1: null,
+      activeCard2: null,
+      activeCard3: null,
+      activeCard4: null,
+      activeCard5: null,
       allnumber: [0, 1, 2, 3, 4],
       infobot: useCounterStore(),
       allcard: useAllcard(),
 
-      obj0: {
-        pos: 0,
-        picture: "/src/assets/picture/hothead.jpg"
-      },
-      obj1: {
-        pos: 1,
-        picture: "/src/assets/picture/hothead.jpg"
-      },
-      obj2: {
-        pos: 2,
-        picture: "/src/assets/picture/hothead.jpg"
-      },
-      obj3: {
-        pos: 3,
-        picture: "/src/assets/picture/hothead.jpg"
-      },
-      obj4: {
-        pos: 4,
-        picture: "/src/assets/picture/hothead.jpg"
-      }
+
+
 
     }
   },
   methods: {
     createNewComponent() {
+      const sound = new Audio('/src/assets/sound/wargoddaimubai.mp3');
+      sound.play();
       if (this.currentComponent) {
-       
+
         this.createNewComponent2()
 
         return
@@ -90,7 +79,7 @@ export default defineComponent({
 
       this.allnumber.splice(rand, 1)
       //console.log('random num: ', rand)
-//console.log('num: ',this.allnumber)
+      //console.log('num: ',this.allnumber)
 
       this.infobot.cardname[1] = this.allcard.cardname[realinfo]
       this.infobot.cardatk[1] = this.allcard.cardatk[realinfo]
@@ -117,7 +106,7 @@ export default defineComponent({
 
       this.allnumber.splice(rand, 1)
       //console.log('random num: ', rand)
-//console.log('num: ',this.allnumber)
+      //console.log('num: ',this.allnumber)
 
       this.infobot.cardatk[2] = this.allcard.cardatk[realinfo]
       this.infobot.cardname[2] = this.allcard.cardname[realinfo]
@@ -139,7 +128,7 @@ export default defineComponent({
 
       this.allnumber.splice(rand, 1)
       //console.log('random num: ', rand)
-//console.log('num: ',this.allnumber)
+      //console.log('num: ',this.allnumber)
 
       this.infobot.cardatk[3] = this.allcard.cardatk[realinfo]
       this.infobot.cardname[3] = this.allcard.cardname[realinfo]
@@ -157,7 +146,7 @@ export default defineComponent({
 
       this.allnumber.splice(rand, 1)
       //console.log('random num: ', rand)
-//console.log('num: ',this.allnumber)
+      //console.log('num: ',this.allnumber)
 
       this.infobot.cardname[4] = this.allcard.cardname[realinfo]
       this.infobot.cardatk[4] = this.allcard.cardatk[realinfo]
@@ -167,7 +156,172 @@ export default defineComponent({
 
 
       this.currentComponent5 = Cardbase
+    },
+    animateElement(pos) {
+      console.log(pos)
+      const posq = parseInt(pos)
+      const sound = new Audio('/src/assets/sound/youdumb.mp3');
+      sound.play();
+
+
+      if (this.activeCard1) {
+        if (this.activeCard2) {
+          if (this.activeCard3) {
+            if (this.activeCard4) {
+              //relocate data
+              this.infobot.cardatk[9] = this.infobot.cardatk[posq]
+              this.infobot.cardname[9] = this.infobot.cardname[posq]
+              this.infobot.cardhp[9] = this.infobot.cardhp[posq]
+              this.infobot.cardpassive[9] = this.infobot.cardpassive[posq]
+              this.infobot.picture[9] = this.infobot.picture[posq]
+              switch (posq) {
+                case 0:
+                  this.currentComponent = null
+                  break
+                case 1:
+                  this.currentComponent2 = null
+                  break
+                case 2:
+                  this.currentComponent3 = null
+                  break
+                case 3:
+                  this.currentComponent4 = null
+                  break
+                case 4:
+                  this.currentComponent5 = null
+                  break
+                default:
+                  break
+              }
+
+
+              this.activeCard5 = Cardbase
+              return
+
+            }
+            //relocate data
+            this.infobot.cardatk[8] = this.infobot.cardatk[posq]
+            this.infobot.cardname[8] = this.infobot.cardname[posq]
+            this.infobot.cardhp[8] = this.infobot.cardhp[posq]
+            this.infobot.cardpassive[8] = this.infobot.cardpassive[posq]
+            this.infobot.picture[8] = this.infobot.picture[posq]
+            switch (posq) {
+              case 0:
+                this.currentComponent = null
+                break
+              case 1:
+                this.currentComponent2 = null
+                break
+              case 2:
+                this.currentComponent3 = null
+                break
+              case 3:
+                this.currentComponent4 = null
+                break
+              case 4:
+                this.currentComponent5 = null
+                break
+              default:
+                break
+            }
+
+            this.activeCard4 = Cardbase
+            return
+          }
+          //relocate data
+          this.infobot.cardatk[7] = this.infobot.cardatk[posq]
+          this.infobot.cardname[7] = this.infobot.cardname[posq]
+          this.infobot.cardhp[7] = this.infobot.cardhp[posq]
+          this.infobot.cardpassive[7] = this.infobot.cardpassive[posq]
+          this.infobot.picture[7] = this.infobot.picture[posq]
+
+          switch (posq) {
+            case 0:
+              this.currentComponent = null
+              break
+            case 1:
+              this.currentComponent2 = null
+              break
+            case 2:
+              this.currentComponent3 = null
+              break
+            case 3:
+              this.currentComponent4 = null
+              break
+            case 4:
+              this.currentComponent5 = null
+              break
+            default:
+              break
+          }
+
+          this.activeCard3 = Cardbase
+          return
+        }
+        //relocate data
+        this.infobot.cardatk[6] = this.infobot.cardatk[posq]
+        this.infobot.cardname[6] = this.infobot.cardname[posq]
+        this.infobot.cardhp[6] = this.infobot.cardhp[posq]
+        this.infobot.cardpassive[6] = this.infobot.cardpassive[posq]
+        this.infobot.picture[6] = this.infobot.picture[posq]
+
+        switch (posq) {
+          case 0:
+            this.currentComponent = null
+            break
+          case 1:
+            this.currentComponent2 = null
+            break
+          case 2:
+            this.currentComponent3 = null
+            break
+          case 3:
+            this.currentComponent4 = null
+            break
+          case 4:
+            this.currentComponent5 = null
+            break
+          default:
+            break
+        }
+
+        this.activeCard2 = Cardbase
+        return
+      }
+      //relocate data
+      this.infobot.cardatk[5] = this.infobot.cardatk[posq]
+      this.infobot.cardname[5] = this.infobot.cardname[posq]
+      this.infobot.cardhp[5] = this.infobot.cardhp[posq]
+      this.infobot.cardpassive[5] = this.infobot.cardpassive[posq]
+      this.infobot.picture[5] = this.infobot.picture[posq]
+
+      //dont know how to concen string to varieble, using eval will result
+      //in copy, and that won't change the real component to null
+      switch (posq) {
+        case 0:
+          this.currentComponent = null
+          break
+        case 1:
+          this.currentComponent2 = null
+          break
+        case 2:
+          this.currentComponent3 = null
+          break
+        case 3:
+          this.currentComponent4 = null
+          break
+        case 4:
+          this.currentComponent5 = null
+          break
+        default:
+          break
+      }
+
+      this.activeCard1 = Cardbase
+      return
     }
+
+
 
   }
 })
@@ -179,15 +333,24 @@ export default defineComponent({
 
 <template>
   <main>
+    <div class="flex justify-center absolute top-[5%]   inset-x-0">
+      <div class="class= flex justify-center ">
+        <component pos="5" :is="activeCard1" />
+        <component pos="6" :is="activeCard2" />
+        <component pos="7" :is="activeCard3" />
+        <component pos="8" :is="activeCard4" />
+        <component pos="9" :is="activeCard5" />
+      </div>
+    </div>
 
-    <div class="flex justify-center absolute bottom-[-1rem] scale-[0.7]     inset-x-0">
-      <div class=" flex justify-center ">
+    <div class="flex justify-center absolute bottom-[-1rem] scale-[0.7]    inset-x-0">
+      <div class=" flex justify-center">
 
-        <component v-bind="obj0" :is="currentComponent" />
-        <component v-bind="obj1" :is="currentComponent2" />
-        <component v-bind="obj2" :is="currentComponent3" />
-        <component v-bind="obj3" :is="currentComponent4" />
-        <component v-bind="obj4" :is="currentComponent5" />
+        <component v-on:click="animateElement(0)" pos="0" :is="currentComponent" />
+        <component v-on:click="animateElement(1)" pos="1" :is="currentComponent2" />
+        <component v-on:click="animateElement(2)" pos="2" :is="currentComponent3" />
+        <component v-on:click="animateElement(3)" pos="3" :is="currentComponent4" />
+        <component v-on:click="animateElement(4)" pos="4" :is="currentComponent5" />
       </div>
 
     </div>

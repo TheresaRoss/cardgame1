@@ -5,12 +5,14 @@ export const useCounterStore = defineStore({
   id:'infobot',
   //init state
   state: ()=>({
+    //first 0-4 index is for card on hand, 5-9 will be active card
     cardname:['1','2','3','4','5'],
     cardatk: ['10','20','30','40','50'],
     cardhp:['100','200','300','400','500'],
     cardpassive:[false,false,true,false,true],
     cardrare:['N','N','R','R','SR'],
-    picture: ["", "", "", "", ""]
+    picture: ["", "", "", "", ""],
+    
 
 
 
