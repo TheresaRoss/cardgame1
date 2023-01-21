@@ -2,7 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
 export const topPlayer = defineStore({
-  id:'infobot',
+  id:'topPlayer',
   //init state
   state: ()=>({
     //first 0-4 index is for card on hand, 5-9 will be active card
