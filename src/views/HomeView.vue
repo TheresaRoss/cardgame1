@@ -34,6 +34,11 @@ export default defineComponent({
       topOnhand3: null,
       topOnhand4: null,
       topOnhand5: null,
+      activetopCard1: null,
+      activetopCard2: null,
+      activetopCard3: null,
+      activetopCard4: null,
+      activetopCard5: null,
     };
   },
   methods: {
@@ -242,6 +247,7 @@ export default defineComponent({
 
       this.currentComponent5 = Cardbase;
     },
+
     animateElement(pos) {
       console.log(pos);
       const posq = parseInt(pos);
@@ -376,9 +382,6 @@ export default defineComponent({
       this.infobot.cardhp[5] = this.infobot.cardhp[posq];
       this.infobot.cardpassive[5] = this.infobot.cardpassive[posq];
       this.infobot.picture[5] = this.infobot.picture[posq];
-
-      //dont know how to concen string to varieble, using eval will result
-      //in copy, and that won't change the real component to null
       switch (posq) {
         case 0:
           this.currentComponent = null;
@@ -402,6 +405,165 @@ export default defineComponent({
       this.activeCard1 = Cardbase;
       return;
     },
+
+    useCardtop(pos) {
+      console.log(pos);
+      const posq = parseInt(pos);
+      const sound = new Audio("/src/assets/sound/youdumb.mp3");
+      sound.play();
+
+      if (this.activetopCard1) {
+        if (this.activetopCard2) {
+          if (this.activetopCard3) {
+            if (this.activetopCard4) {
+              //relocate data
+              this.infotop.cardatk[9] = this.infotop.cardatk[posq];
+              this.infotop.cardname[9] = this.infotop.cardname[posq];
+              this.infotop.cardhp[9] = this.infotop.cardhp[posq];
+              this.infotop.cardpassive[9] = this.infotop.cardpassive[posq];
+              this.infotop.picture[9] = this.infotop.picture[posq];
+              switch (posq) {
+                case 0:
+                  this.topOnhand1 = null;
+                  break;
+                case 1:
+                  this.topOnhand2 = null;
+                  break;
+                case 2:
+                  this.topOnhand3 = null;
+                  break;
+                case 3:
+                  this.topOnhand4 = null;
+                  break;
+                case 4:
+                  this.topOnhand5 = null;
+                  break;
+                default:
+                  break;
+              }
+
+              this.activetopCard5 = Cardbase2;
+              return;
+            }
+            //relocate data
+            this.infotop.cardatk[8] = this.infotop.cardatk[posq];
+            this.infotop.cardname[8] = this.infotop.cardname[posq];
+            this.infotop.cardhp[8] = this.infotop.cardhp[posq];
+            this.infotop.cardpassive[8] = this.infotop.cardpassive[posq];
+            this.infotop.picture[8] = this.infotop.picture[posq];
+            switch (posq) {
+              case 0:
+                this.topOnhand1 = null;
+                break;
+              case 1:
+                this.topOnhand2 = null;
+                break;
+              case 2:
+                this.topOnhand3 = null;
+                break;
+              case 3:
+                this.topOnhand4 = null;
+                break;
+              case 4:
+                this.topOnhand5 = null;
+                break;
+              default:
+                break;
+            }
+
+            this.activetopCard4 = Cardbase2;
+            return;
+          }
+          //relocate data
+          this.infotop.cardatk[7] = this.infotop.cardatk[posq];
+          this.infotop.cardname[7] = this.infotop.cardname[posq];
+          this.infotop.cardhp[7] = this.infotop.cardhp[posq];
+          this.infotop.cardpassive[7] = this.infotop.cardpassive[posq];
+          this.infotop.picture[7] = this.infotop.picture[posq];
+          switch (posq) {
+            case 0:
+              this.topOnhand1 = null;
+              break;
+            case 1:
+              this.topOnhand2 = null;
+              break;
+            case 2:
+              this.topOnhand3 = null;
+              break;
+            case 3:
+              this.topOnhand4 = null;
+              break;
+            case 4:
+              this.topOnhand5 = null;
+              break;
+            default:
+              break;
+          }
+
+          this.activetopCard3 = Cardbase2;
+          return;
+        }
+        //relocate data
+        this.infotop.cardatk[6] = this.infotop.cardatk[posq];
+        this.infotop.cardname[6] = this.infotop.cardname[posq];
+        this.infotop.cardhp[6] = this.infotop.cardhp[posq];
+        this.infotop.cardpassive[6] = this.infotop.cardpassive[posq];
+        this.infotop.picture[6] = this.infotop.picture[posq];
+        switch (posq) {
+          case 0:
+            this.topOnhand1 = null;
+            break;
+          case 1:
+            this.topOnhand2 = null;
+            break;
+          case 2:
+            this.topOnhand3 = null;
+            break;
+          case 3:
+            this.topOnhand4 = null;
+            break;
+          case 4:
+            this.topOnhand5 = null;
+            break;
+          default:
+            break;
+        }
+
+        this.activetopCard2 = Cardbase2;
+        return;
+      }
+      //relocate data
+      this.infotop.cardatk[5] = this.infotop.cardatk[posq];
+      this.infotop.cardname[5] = this.infotop.cardname[posq];
+      this.infotop.cardhp[5] = this.infotop.cardhp[posq];
+      this.infotop.cardpassive[5] = this.infotop.cardpassive[posq];
+      this.infotop.picture[5] = this.infotop.picture[posq];
+
+      //dont know how to concen string to varieble, using eval will result
+      //in copy, and that won't change the real component to null
+      switch (posq) {
+        case 0:
+          this.topOnhand1 = null;
+          break;
+        case 1:
+          this.topOnhand2 = null;
+          break;
+        case 2:
+          this.topOnhand3 = null;
+          break;
+        case 3:
+          this.topOnhand4 = null;
+          break;
+        case 4:
+          this.topOnhand5 = null;
+          break;
+        default:
+          break;
+      }
+
+      this.activetopCard1 = Cardbase2;
+      return;
+    },
   },
 });
 </script>
@@ -411,13 +573,25 @@ export default defineComponent({
     <!-- Card on hand for top player -->
     <div class="flex justify-center absolute top-0 scale-[0.6] inset-x-0">
       <div class="flex justify-center">
-        <component pos="0" :is="topOnhand1" />
-        <component pos="1" :is="topOnhand2" />
-        <component pos="2" :is="topOnhand3" />
-        <component pos="3" :is="topOnhand4" />
-        <component pos="4" :is="topOnhand5" />
+        <component pos="0" v-on:click="useCardtop(0)" :is="topOnhand1" />
+        <component pos="1" v-on:click="useCardtop(1)" :is="topOnhand2" />
+        <component pos="2" v-on:click="useCardtop(2)" :is="topOnhand3" />
+        <component pos="3" v-on:click="useCardtop(3)" :is="topOnhand4" />
+        <component pos="4" v-on:click="useCardtop(4)" :is="topOnhand5" />
       </div>
     </div>
+
+    <!-- Active card for top player -->
+    <div class="flex justify-center absolute scale-[0.7] top-[25%] inset-x-0">
+      <div class="flex justify-center">
+        <component pos="5" :is="activetopCard1" />
+        <component pos="6" :is="activetopCard2" />
+        <component pos="7" :is="activetopCard3" />
+        <component pos="8" :is="activetopCard4" />
+        <component pos="9" :is="activetopCard5" />
+      </div>
+    </div>
+
     <!-- card on hand for bot player -->
 
     <div
@@ -452,8 +626,8 @@ export default defineComponent({
       </div>
     </div>
     <!-- Active card for bot player -->
-    <div class="flex justify-center absolute scale-[0.8] top-[45%] inset-x-0">
-      <div class="class= flex justify-center">
+    <div class="flex justify-center absolute scale-[0.7] top-[50%] inset-x-0">
+      <div class="flex justify-center">
         <component pos="5" :is="activeCard1" />
         <component pos="6" :is="activeCard2" />
         <component pos="7" :is="activeCard3" />
