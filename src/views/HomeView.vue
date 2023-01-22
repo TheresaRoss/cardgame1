@@ -6,6 +6,7 @@ import { defineComponent } from "vue";
 import { useCounterStore } from "../state/stateforbot";
 import { useAllcard } from "../state/allcard";
 import { topPlayer } from "../state/statefortop";
+import { gameMech } from "../state/gamemech";
 import Cardbase2 from "../components/Cardbase2.vue";
 </script>
 
@@ -43,11 +44,13 @@ export default defineComponent({
       activebotCardpos: 0,
       topplayerclickStatus: 0,
       activetopCardpos: 0,
+      gamemech: gameMech(),
     };
   },
   methods: {
     drawTop() {
       const sound = new Audio("/src/assets/sound/wargoddaimubai.mp3");
+      sound.volume = 0.7;
       sound.play();
       if (this.topOnhand1) {
         this.drawTop2();
@@ -146,8 +149,10 @@ export default defineComponent({
 
       this.topOnhand5 = Cardbase2;
     },
+
     createNewComponent() {
       const sound = new Audio("/src/assets/sound/wargoddaimubai.mp3");
+      sound.volume = 0.7;
       sound.play();
       if (this.currentComponent) {
         this.createNewComponent2();
@@ -256,6 +261,7 @@ export default defineComponent({
       console.log(pos);
       const posq = parseInt(pos);
       const sound = new Audio("/src/assets/sound/youdumb.mp3");
+      sound.volume = 0.5;
       sound.play();
 
       if (this.activeCard1) {
@@ -414,6 +420,7 @@ export default defineComponent({
       console.log(pos);
       const posq = parseInt(pos);
       const sound = new Audio("/src/assets/sound/youdumb.mp3");
+      sound.volume = 0.5;
       sound.play();
 
       if (this.activetopCard1) {
@@ -571,14 +578,16 @@ export default defineComponent({
 
     //onClicktoAttack
     botOnclickcard(pos) {
-      if (this.botplayerclickStatus === 0) {
-        this.botplayerclickStatus = 1;
-        //set style
-        this.infobot.active[pos] = true;
+      if (!this.gamemech.whoseTurn) {
+        if (this.botplayerclickStatus === 0) {
+          this.botplayerclickStatus = 1;
+          //set style
+          this.infobot.active[pos] = true;
 
-        this.activebotCardpos = pos;
-      } else if (this.botplayerclickStatus === 1) {
-        this.activebotCardpos = pos;
+          this.activebotCardpos = pos;
+        } else if (this.botplayerclickStatus === 1) {
+          this.activebotCardpos = pos;
+        }
       }
     },
     //after bot select active card, they attack
@@ -586,7 +595,8 @@ export default defineComponent({
       //if bot selected active card and ready to attack
       if (this.botplayerclickStatus === 1) {
         //console.log("I : ", this.activebotCardpos, "Will attack: ", pos);
-
+        const sound = new Audio("/src/assets/sound/surrendernever.mp3");
+        sound.play();
         //calculate and update dmg
         this.infotop.cardhp[pos] -= this.infobot.cardatk[this.activebotCardpos];
         //console.log("attacked!");
@@ -602,20 +612,24 @@ export default defineComponent({
 
     //onClicktoAttack
     topOnclickcard(pos) {
-      if (this.topplayerclickStatus === 0) {
-        this.topplayerclickStatus = 1;
-        this.activetopCardpos = pos;
+      if (this.gamemech.whoseTurn) {
+        if (this.topplayerclickStatus === 0) {
+          this.topplayerclickStatus = 1;
+          this.activetopCardpos = pos;
 
-        this.infotop.active[pos] = true;
-      } else if (this.topplayerclickStatus === 1) {
-        this.activetopCardpos = pos;
+          this.infotop.active[pos] = true;
+        } else if (this.topplayerclickStatus === 1) {
+          this.activetopCardpos = pos;
+        }
       }
     },
-
     topOnselecttarget(pos) {
       if (this.topplayerclickStatus === 1) {
         //console.log("I : ", this.activebotCardpos, "Will attack: ", pos);
 
+        var sound = new Audio("/src/assets/sound/surrendernever.mp3");
+
+        sound.play();
         //calculate and update dmg
         this.infobot.cardhp[pos] -= this.infotop.cardatk[this.activetopCardpos];
         //console.log("attacked!");
@@ -626,6 +640,17 @@ export default defineComponent({
       } else {
         return;
       }
+    },
+    topEndturn() {
+      this.topplayerclickStatus = 0;
+      this.infotop.active.fill(false);
+
+      this.gamemech.increaseTurn();
+    },
+    botEndturn() {
+      this.botplayerclickStatus = 0;
+      this.infobot.active.fill(false);
+      this.gamemech.increaseTurn();
     },
   },
 });
@@ -781,5 +806,30 @@ export default defineComponent({
         <Deck />
       </div>
     </div>
+
+    <!-- turn manage -->
+    <div class="absolute top-[25%] right-0 mr-5">
+      <button @click="topEndturn" class="px-4 py-2 bg-blue-500">
+        END TURN
+      </button>
+    </div>
+
+    <div class="absolute bottom-[25%] right-0 mr-5">
+      <button @click="botEndturn" class="px-4 py-2 bg-green-500">
+        END TURN
+      </button>
+    </div>
+
+    <!-- turn number and whose turn -->
+    <div
+      v-bind:class="{
+        'absolute mr-5 top top-[50%] right-0 border-x-[40px] rotate-180 border-x-transparent border-b-[40px] border-b-blue-600':
+          !gamemech.whoseTurn,
+        'absolute mr-5 top top-[50%] right-0 border-x-[40px]  border-x-transparent border-b-[40px] border-b-blue-600':
+          gamemech.whoseTurn,
+      }"
+    ></div>
+    <div>Turn Count: {{ gamemech.turnCount }}</div>
+    <div>Whose Turn: {{ gamemech.whoseTurn }}</div>
   </main>
 </template>
