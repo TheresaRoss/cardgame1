@@ -1,5 +1,10 @@
 <template>
   <div
+    v-bind:class="{
+      //on Active style
+      'scale-[1.2]': infobot.active[pos],
+      'scale-[1]': !infobot.active[pos],
+    }"
     class="card mx-2 p-2 w-full h-full rounded-xl bg-gradient-to-tr from-purple-500 via-red-500 to-yellow-500"
   >
     <div class="pt-2 px-5 pb-5 bg-white w-full h-full rounded-xl">

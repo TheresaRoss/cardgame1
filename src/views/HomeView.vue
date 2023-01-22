@@ -39,6 +39,10 @@ export default defineComponent({
       activetopCard3: null,
       activetopCard4: null,
       activetopCard5: null,
+      botplayerclickStatus: 0,
+      activebotCardpos: 0,
+      topplayerclickStatus: 0,
+      activetopCardpos: 0,
     };
   },
   methods: {
@@ -564,6 +568,65 @@ export default defineComponent({
       this.activetopCard1 = Cardbase2;
       return;
     },
+
+    //onClicktoAttack
+    botOnclickcard(pos) {
+      if (this.botplayerclickStatus === 0) {
+        this.botplayerclickStatus = 1;
+        //set style
+        this.infobot.active[pos] = true;
+
+        this.activebotCardpos = pos;
+      } else if (this.botplayerclickStatus === 1) {
+        this.activebotCardpos = pos;
+      }
+    },
+    //after bot select active card, they attack
+    botOnselecttarget(pos) {
+      //if bot selected active card and ready to attack
+      if (this.botplayerclickStatus === 1) {
+        //console.log("I : ", this.activebotCardpos, "Will attack: ", pos);
+
+        //calculate and update dmg
+        this.infotop.cardhp[pos] -= this.infobot.cardatk[this.activebotCardpos];
+        //console.log("attacked!");
+
+        //remove style
+        this.infobot.active[this.activebotCardpos] = false;
+        this.botplayerclickStatus = 0;
+        this.activebotCardpos = 0;
+      } else {
+        return;
+      }
+    },
+
+    //onClicktoAttack
+    topOnclickcard(pos) {
+      if (this.topplayerclickStatus === 0) {
+        this.topplayerclickStatus = 1;
+        this.activetopCardpos = pos;
+
+        this.infotop.active[pos] = true;
+      } else if (this.topplayerclickStatus === 1) {
+        this.activetopCardpos = pos;
+      }
+    },
+
+    topOnselecttarget(pos) {
+      if (this.topplayerclickStatus === 1) {
+        //console.log("I : ", this.activebotCardpos, "Will attack: ", pos);
+
+        //calculate and update dmg
+        this.infobot.cardhp[pos] -= this.infotop.cardatk[this.activetopCardpos];
+        //console.log("attacked!");
+
+        this.infotop.active[this.activetopCardpos] = false;
+        this.topplayerclickStatus = 0;
+        this.activetopCardpos = 0;
+      } else {
+        return;
+      }
+    },
   },
 });
 </script>
@@ -584,11 +647,46 @@ export default defineComponent({
     <!-- Active card for top player -->
     <div class="flex justify-center absolute scale-[0.7] top-[25%] inset-x-0">
       <div class="flex justify-center">
-        <component pos="5" :is="activetopCard1" />
-        <component pos="6" :is="activetopCard2" />
-        <component pos="7" :is="activetopCard3" />
-        <component pos="8" :is="activetopCard4" />
-        <component pos="9" :is="activetopCard5" />
+        <component
+          pos="5"
+          v-on:click="
+            botOnselecttarget(5);
+            topOnclickcard(5);
+          "
+          :is="activetopCard1"
+        />
+        <component
+          pos="6"
+          v-on:click="
+            botOnselecttarget(6);
+            topOnclickcard(6);
+          "
+          :is="activetopCard2"
+        />
+        <component
+          pos="7"
+          v-on:click="
+            botOnselecttarget(7);
+            topOnclickcard(7);
+          "
+          :is="activetopCard3"
+        />
+        <component
+          pos="8"
+          v-on:click="
+            botOnselecttarget(8);
+            topOnclickcard(8);
+          "
+          :is="activetopCard4"
+        />
+        <component
+          pos="9"
+          v-on:click="
+            botOnselecttarget(9);
+            topOnclickcard(9);
+          "
+          :is="activetopCard5"
+        />
       </div>
     </div>
 
@@ -628,11 +726,46 @@ export default defineComponent({
     <!-- Active card for bot player -->
     <div class="flex justify-center absolute scale-[0.7] top-[50%] inset-x-0">
       <div class="flex justify-center">
-        <component pos="5" :is="activeCard1" />
-        <component pos="6" :is="activeCard2" />
-        <component pos="7" :is="activeCard3" />
-        <component pos="8" :is="activeCard4" />
-        <component pos="9" :is="activeCard5" />
+        <component
+          v-on:click="
+            botOnclickcard(5);
+            topOnselecttarget(5);
+          "
+          pos="5"
+          :is="activeCard1"
+        />
+        <component
+          v-on:click="
+            botOnclickcard(6);
+            topOnselecttarget(6);
+          "
+          pos="6"
+          :is="activeCard2"
+        />
+        <component
+          v-on:click="
+            botOnclickcard(7);
+            topOnselecttarget(7);
+          "
+          pos="7"
+          :is="activeCard3"
+        />
+        <component
+          v-on:click="
+            botOnclickcard(8);
+            topOnselecttarget(8);
+          "
+          pos="8"
+          :is="activeCard4"
+        />
+        <component
+          v-on:click="
+            botOnclickcard(9);
+            topOnselecttarget(9);
+          "
+          pos="9"
+          :is="activeCard5"
+        />
       </div>
     </div>
 

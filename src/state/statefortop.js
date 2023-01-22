@@ -12,6 +12,8 @@ export const topPlayer = defineStore({
     cardpassive:[false,false,true,false,true],
     cardrare:['N','N','R','R','SR'],
     picture: ["", "", "", "", ""],
+    active: [false,false,false,false,false,false,false,false,false,false,false,false]
+    
     
 
 
