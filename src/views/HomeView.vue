@@ -595,7 +595,7 @@ export default defineComponent({
       //if bot selected active card and ready to attack
       if (this.botplayerclickStatus === 1) {
         //console.log("I : ", this.activebotCardpos, "Will attack: ", pos);
-        const sound1 = new Audio("/src/assets/sound/surrendernever.mp3");
+        const sound1 = new Audio("/src/assets/sound/nopunch.mp3");
 
         sound1.play();
         //calculate and update dmg
@@ -604,6 +604,9 @@ export default defineComponent({
 
         //destroy that card which has hp below 0
         if (this.infotop.cardhp[pos] <= 0) {
+          var sound = new Audio("/src/assets/sound/ihee.mp3");
+          sound.volume = 0.4;
+          sound.play();
           switch (pos) {
             case 5:
               this.activetopCard1 = null;
@@ -651,7 +654,7 @@ export default defineComponent({
       if (this.topplayerclickStatus === 1) {
         //console.log("I : ", this.activebotCardpos, "Will attack: ", pos);
 
-        var sound1 = new Audio("/src/assets/sound/surrendernever.mp3");
+        var sound1 = new Audio("/src/assets/sound/nopunch.mp3");
 
         sound1.play();
         //calculate and update dmg
@@ -660,6 +663,9 @@ export default defineComponent({
 
         //destroy that card which has hp below 0
         if (this.infobot.cardhp[pos] <= 0) {
+          var sound = new Audio("/src/assets/sound/ihee.mp3");
+          sound.volume = 0.4;
+          sound.play();
           switch (pos) {
             case 5:
               this.activeCard1 = null;
