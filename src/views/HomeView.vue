@@ -595,11 +595,35 @@ export default defineComponent({
       //if bot selected active card and ready to attack
       if (this.botplayerclickStatus === 1) {
         //console.log("I : ", this.activebotCardpos, "Will attack: ", pos);
-        const sound = new Audio("/src/assets/sound/surrendernever.mp3");
-        sound.play();
+        const sound1 = new Audio("/src/assets/sound/surrendernever.mp3");
+
+        sound1.play();
         //calculate and update dmg
         this.infotop.cardhp[pos] -= this.infobot.cardatk[this.activebotCardpos];
         //console.log("attacked!");
+
+        //destroy that card which has hp below 0
+        if (this.infotop.cardhp[pos] <= 0) {
+          switch (pos) {
+            case 5:
+              this.activetopCard1 = null;
+              break;
+            case 6:
+              this.activetopCard2 = null;
+              break;
+            case 7:
+              this.activetopCard3 = null;
+              break;
+            case 8:
+              this.activetopCard4 = null;
+              break;
+            case 9:
+              this.activetopCard5 = null;
+              break;
+            default:
+              break;
+          }
+        }
 
         //remove style
         this.infobot.active[this.activebotCardpos] = false;
@@ -627,12 +651,35 @@ export default defineComponent({
       if (this.topplayerclickStatus === 1) {
         //console.log("I : ", this.activebotCardpos, "Will attack: ", pos);
 
-        var sound = new Audio("/src/assets/sound/surrendernever.mp3");
+        var sound1 = new Audio("/src/assets/sound/surrendernever.mp3");
 
-        sound.play();
+        sound1.play();
         //calculate and update dmg
         this.infobot.cardhp[pos] -= this.infotop.cardatk[this.activetopCardpos];
         //console.log("attacked!");
+
+        //destroy that card which has hp below 0
+        if (this.infobot.cardhp[pos] <= 0) {
+          switch (pos) {
+            case 5:
+              this.activeCard1 = null;
+              break;
+            case 6:
+              this.activeCard2 = null;
+              break;
+            case 7:
+              this.activeCard3 = null;
+              break;
+            case 8:
+              this.activeCard4 = null;
+              break;
+            case 9:
+              this.activeCard5 = null;
+              break;
+            default:
+              break;
+          }
+        }
 
         this.infotop.active[this.activetopCardpos] = false;
         this.topplayerclickStatus = 0;
