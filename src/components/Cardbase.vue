@@ -8,6 +8,11 @@
     class="card mx-2 p-2 w-full h-full rounded-xl bg-gradient-to-tr from-purple-500 via-red-500 to-yellow-500"
   >
     <div class="pt-2 px-5 pb-5 bg-white w-full h-full rounded-xl">
+      <div
+        class="absolute right-[-5%] top-[-5%] rounded-full text-xs w-8 h-8 bg-yellow-400 text-black justify-center flex items-center"
+      >
+        {{ infobot.cardcost[pos] }}
+      </div>
       <div class="flex justify-center bg-white">
         <h1 class="text-black text-xl bg-white">{{ infobot.cardname[pos] }}</h1>
       </div>

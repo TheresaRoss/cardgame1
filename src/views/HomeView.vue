@@ -52,6 +52,9 @@ export default defineComponent({
       const sound = new Audio("/src/assets/sound/wargoddaimubai.mp3");
       sound.volume = 0.7;
       sound.play();
+
+      //minus draw cost
+      this.infotop.money -= 10;
       if (this.topOnhand1) {
         this.drawTop2();
 
@@ -71,6 +74,7 @@ export default defineComponent({
       this.infotop.cardhp[0] = this.allcard.cardhp[realinfo];
       this.infotop.cardpassive[0] = this.allcard.cardpassive[realinfo];
       this.infotop.picture[0] = this.allcard.picture[realinfo];
+      this.infotop.cardcost[0] = this.allcard.cardcost[realinfo];
 
       this.topOnhand1 = Cardbase2;
     },
@@ -91,6 +95,7 @@ export default defineComponent({
       this.infotop.cardhp[1] = this.allcard.cardhp[realinfo];
       this.infotop.cardpassive[1] = this.allcard.cardpassive[realinfo];
       this.infotop.picture[1] = this.allcard.picture[realinfo];
+      this.infotop.cardcost[1] = this.allcard.cardcost[realinfo];
 
       this.topOnhand2 = Cardbase2;
     },
@@ -111,6 +116,7 @@ export default defineComponent({
       this.infotop.cardhp[2] = this.allcard.cardhp[realinfo];
       this.infotop.cardpassive[2] = this.allcard.cardpassive[realinfo];
       this.infotop.picture[2] = this.allcard.picture[realinfo];
+      this.infotop.cardcost[2] = this.allcard.cardcost[realinfo];
 
       this.topOnhand3 = Cardbase2;
     },
@@ -131,6 +137,7 @@ export default defineComponent({
       this.infotop.cardhp[3] = this.allcard.cardhp[realinfo];
       this.infotop.cardpassive[3] = this.allcard.cardpassive[realinfo];
       this.infotop.picture[3] = this.allcard.picture[realinfo];
+      this.infotop.cardcost[3] = this.allcard.cardcost[realinfo];
 
       this.topOnhand4 = Cardbase2;
     },
@@ -146,6 +153,7 @@ export default defineComponent({
       this.infotop.cardhp[4] = this.allcard.cardhp[realinfo];
       this.infotop.cardpassive[4] = this.allcard.cardpassive[realinfo];
       this.infotop.picture[4] = this.allcard.picture[realinfo];
+      this.infotop.cardcost[4] = this.allcard.cardcost[realinfo];
 
       this.topOnhand5 = Cardbase2;
     },
@@ -154,6 +162,9 @@ export default defineComponent({
       const sound = new Audio("/src/assets/sound/wargoddaimubai.mp3");
       sound.volume = 0.7;
       sound.play();
+
+      //minus draw cost
+      this.infobot.money -= 10;
       if (this.currentComponent) {
         this.createNewComponent2();
 
@@ -173,6 +184,7 @@ export default defineComponent({
       this.infobot.cardhp[0] = this.allcard.cardhp[realinfo];
       this.infobot.cardpassive[0] = this.allcard.cardpassive[realinfo];
       this.infobot.picture[0] = this.allcard.picture[realinfo];
+      this.infobot.cardcost[0] = this.allcard.cardcost[realinfo];
 
       this.currentComponent = Cardbase;
     },
@@ -194,6 +206,7 @@ export default defineComponent({
       this.infobot.cardhp[1] = this.allcard.cardhp[realinfo];
       this.infobot.cardpassive[1] = this.allcard.cardpassive[realinfo];
       this.infobot.picture[1] = this.allcard.picture[realinfo];
+      this.infobot.cardcost[1] = this.allcard.cardcost[realinfo];
 
       this.currentComponent2 = Cardbase;
     },
@@ -216,6 +229,7 @@ export default defineComponent({
       this.infobot.cardhp[2] = this.allcard.cardhp[realinfo];
       this.infobot.cardpassive[2] = this.allcard.cardpassive[realinfo];
       this.infobot.picture[2] = this.allcard.picture[realinfo];
+      this.infobot.cardcost[2] = this.allcard.cardcost[realinfo];
 
       this.currentComponent3 = Cardbase;
     },
@@ -237,6 +251,7 @@ export default defineComponent({
       this.infobot.cardhp[3] = this.allcard.cardhp[realinfo];
       this.infobot.cardpassive[3] = this.allcard.cardpassive[realinfo];
       this.infobot.picture[3] = this.allcard.picture[realinfo];
+      this.infobot.cardcost[3] = this.allcard.cardcost[realinfo];
 
       this.currentComponent4 = Cardbase;
     },
@@ -253,6 +268,7 @@ export default defineComponent({
       this.infobot.cardhp[4] = this.allcard.cardhp[realinfo];
       this.infobot.cardpassive[4] = this.allcard.cardpassive[realinfo];
       this.infobot.picture[4] = this.allcard.picture[realinfo];
+      this.infobot.cardcost[4] = this.allcard.cardcost[realinfo];
 
       this.currentComponent5 = Cardbase;
     },
@@ -264,6 +280,8 @@ export default defineComponent({
       sound.volume = 0.5;
       sound.play();
 
+      this.infobot.money -= this.infobot.cardcost[posq];
+
       if (this.activeCard1) {
         if (this.activeCard2) {
           if (this.activeCard3) {
@@ -274,6 +292,7 @@ export default defineComponent({
               this.infobot.cardhp[9] = this.infobot.cardhp[posq];
               this.infobot.cardpassive[9] = this.infobot.cardpassive[posq];
               this.infobot.picture[9] = this.infobot.picture[posq];
+              this.infobot.cardcost[9] = this.infobot.cardcost[posq];
               switch (posq) {
                 case 0:
                   this.currentComponent = null;
@@ -303,6 +322,7 @@ export default defineComponent({
             this.infobot.cardhp[8] = this.infobot.cardhp[posq];
             this.infobot.cardpassive[8] = this.infobot.cardpassive[posq];
             this.infobot.picture[8] = this.infobot.picture[posq];
+            this.infobot.cardcost[8] = this.infobot.cardcost[posq];
             switch (posq) {
               case 0:
                 this.currentComponent = null;
@@ -332,6 +352,7 @@ export default defineComponent({
           this.infobot.cardhp[7] = this.infobot.cardhp[posq];
           this.infobot.cardpassive[7] = this.infobot.cardpassive[posq];
           this.infobot.picture[7] = this.infobot.picture[posq];
+          this.infobot.cardcost[7] = this.infobot.cardcost[posq];
 
           switch (posq) {
             case 0:
@@ -362,6 +383,7 @@ export default defineComponent({
         this.infobot.cardhp[6] = this.infobot.cardhp[posq];
         this.infobot.cardpassive[6] = this.infobot.cardpassive[posq];
         this.infobot.picture[6] = this.infobot.picture[posq];
+        this.infobot.cardcost[6] = this.infobot.cardcost[posq];
 
         switch (posq) {
           case 0:
@@ -392,6 +414,7 @@ export default defineComponent({
       this.infobot.cardhp[5] = this.infobot.cardhp[posq];
       this.infobot.cardpassive[5] = this.infobot.cardpassive[posq];
       this.infobot.picture[5] = this.infobot.picture[posq];
+      this.infobot.cardcost[5] = this.infobot.cardcost[posq];
       switch (posq) {
         case 0:
           this.currentComponent = null;
@@ -422,6 +445,8 @@ export default defineComponent({
       const sound = new Audio("/src/assets/sound/youdumb.mp3");
       sound.volume = 0.5;
       sound.play();
+      //play card minus money
+      this.infotop.money -= this.infotop.cardcost[posq];
 
       if (this.activetopCard1) {
         if (this.activetopCard2) {
@@ -433,6 +458,7 @@ export default defineComponent({
               this.infotop.cardhp[9] = this.infotop.cardhp[posq];
               this.infotop.cardpassive[9] = this.infotop.cardpassive[posq];
               this.infotop.picture[9] = this.infotop.picture[posq];
+              this.infotop.cardcost[9] = this.infotop.cardcost[posq];
               switch (posq) {
                 case 0:
                   this.topOnhand1 = null;
@@ -462,6 +488,7 @@ export default defineComponent({
             this.infotop.cardhp[8] = this.infotop.cardhp[posq];
             this.infotop.cardpassive[8] = this.infotop.cardpassive[posq];
             this.infotop.picture[8] = this.infotop.picture[posq];
+            this.infotop.cardcost[8] = this.infotop.cardcost[posq];
             switch (posq) {
               case 0:
                 this.topOnhand1 = null;
@@ -491,6 +518,7 @@ export default defineComponent({
           this.infotop.cardhp[7] = this.infotop.cardhp[posq];
           this.infotop.cardpassive[7] = this.infotop.cardpassive[posq];
           this.infotop.picture[7] = this.infotop.picture[posq];
+          this.infotop.cardcost[7] = this.infotop.cardcost[posq];
           switch (posq) {
             case 0:
               this.topOnhand1 = null;
@@ -520,6 +548,7 @@ export default defineComponent({
         this.infotop.cardhp[6] = this.infotop.cardhp[posq];
         this.infotop.cardpassive[6] = this.infotop.cardpassive[posq];
         this.infotop.picture[6] = this.infotop.picture[posq];
+        this.infotop.cardcost[6] = this.infotop.cardcost[posq];
         switch (posq) {
           case 0:
             this.topOnhand1 = null;
@@ -549,6 +578,7 @@ export default defineComponent({
       this.infotop.cardhp[5] = this.infotop.cardhp[posq];
       this.infotop.cardpassive[5] = this.infotop.cardpassive[posq];
       this.infotop.picture[5] = this.infotop.picture[posq];
+      this.infotop.cardcost[5] = this.infotop.cardcost[posq];
 
       //dont know how to concen string to varieble, using eval will result
       //in copy, and that won't change the real component to null
@@ -696,12 +726,14 @@ export default defineComponent({
     },
     topEndturn() {
       this.topplayerclickStatus = 0;
+      this.infobot.money += 10;
       this.infotop.active.fill(false);
 
       this.gamemech.increaseTurn();
     },
     botEndturn() {
       this.botplayerclickStatus = 0;
+      this.infotop.money += 10; //add money
       this.infobot.active.fill(false);
       this.gamemech.increaseTurn();
     },
@@ -847,27 +879,59 @@ export default defineComponent({
       </div>
     </div>
 
+    <!-- money label for top -->
+    <div class="absolute left-0 top-[25%]">
+      <div class="text-2xl">MONEY FOR TOP LA: {{ infotop.money }}</div>
+    </div>
+
+    <!-- Money label for bot -->
+    <div class="absolute left-0 top-[75%]">
+      <div class="text-2xl">MONEY FOR TOP LA: {{ infobot.money }}</div>
+    </div>
+
     <!-- Deck for top player -->
     <div class="absolute top-0 right-5">
+      <div
+        class="absolute mt-2 ml-7 rounded-full w-10 h-10 bg-yellow-400 text-black justify-center flex items-center"
+      >
+        50
+      </div>
       <div v-on:click="drawTop" class="w-28 h-40 m-5">
         <Deck />
       </div>
     </div>
     <!-- Deck for bot player -->
     <div class="absolute bottom-0 right-5">
+      <div
+        class="absolute mt-2 ml-7 rounded-full w-10 h-10 bg-yellow-400 text-black justify-center flex items-center"
+      >
+        50
+      </div>
       <div v-on:click="createNewComponent" class="w-28 h-40 m-5">
         <Deck />
       </div>
     </div>
 
     <!-- turn manage -->
-    <div class="absolute top-[25%] right-0 mr-5">
+    <div
+      v-bind:class="{
+        visible: this.gamemech.whoseTurn,
+        invisible: !this.gamemech.whoseTurn,
+      }"
+      class="absolute top-[25%] right-0 mr-5"
+    >
       <button @click="topEndturn" class="px-4 py-2 bg-blue-500">
         END TURN
       </button>
     </div>
 
-    <div class="absolute bottom-[25%] right-0 mr-5">
+    <div
+      v-bind:class="{
+        visible: !this.gamemech.whoseTurn,
+        invisible: this.gamemech.whoseTurn,
+      }"
+      class="absolute bottom-[25%] right-0 mr-5"
+    >
       <button @click="botEndturn" class="px-4 py-2 bg-green-500">
         END TURN
       </button>

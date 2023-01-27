@@ -10,6 +10,7 @@ export const useAllcard = defineStore({
         cardhp: ['200', '210', '30', '40', '53'],
         cardpassive: [false, false, true, false, true],
         cardrare: ['N', 'N', 'R', 'R', 'SR'],
+        cardcost: [10,5,8,15,20],
         picture: ["/src/assets/picture/partyman1.jpg", "/src/assets/picture/hothead.jpg",
          "/src/assets/picture/catandguitar.jpg", "/src/assets/picture/hothead.jpg", "/src/assets/picture/hothead.jpg"]
 
