@@ -14,7 +14,7 @@ export const useCounterStore = defineStore({
     picture: ["", "", "", "", ""],
     cardcost: [0,0,0,0,0],
     active: [false,false,false,false,false,false,false,false,false,false,false,false],
-    money:25,
+    money:200,
     
 
 

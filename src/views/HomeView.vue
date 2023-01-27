@@ -3,10 +3,12 @@ import Couter from "@/components/Couter.vue";
 import Cardbase from "../components/Cardbase.vue";
 import Deck from "../components/Deck.vue";
 import { defineComponent } from "vue";
+import { stateDes } from "../state/statedes";
 import { useCounterStore } from "../state/stateforbot";
 import { useAllcard } from "../state/allcard";
 import { topPlayer } from "../state/statefortop";
 import { gameMech } from "../state/gamemech";
+
 import Cardbase2 from "../components/Cardbase2.vue";
 </script>
 
@@ -45,6 +47,8 @@ export default defineComponent({
       topplayerclickStatus: 0,
       activetopCardpos: 0,
       gamemech: gameMech(),
+      onhovercard: false,
+      statedes: stateDes(),
     };
   },
   methods: {
@@ -771,6 +775,17 @@ export default defineComponent({
       this.infobot.active.fill(false);
       this.gamemech.increaseTurn();
     },
+    onmouseEnterdes(pos) {
+      this.onhovercard = true;
+      // console.log(this.statedes.cardname);
+      this.statedes.cardname = this.infobot.cardname[pos];
+      this.statedes.cardatk = this.infobot.cardatk[pos];
+      this.statedes.cardcost = this.infobot.cardcost[pos];
+      this.statedes.cardhp = this.infobot.cardhp[pos];
+    },
+    onmouseLeavedes(pos) {
+      this.onhovercard = false;
+    },
   },
 });
 </script>
@@ -842,26 +857,36 @@ export default defineComponent({
       <div class="flex justify-center">
         <component
           v-on:click="animateElement(0)"
+          v-on:mouseenter="onmouseEnterdes(0)"
+          v-on:mouseleave="onmouseLeavedes(0)"
           pos="0"
           :is="currentComponent"
         />
         <component
           v-on:click="animateElement(1)"
+          v-on:mouseenter="onmouseEnterdes(1)"
+          v-on:mouseleave="onmouseLeavedes(1)"
           pos="1"
           :is="currentComponent2"
         />
         <component
           v-on:click="animateElement(2)"
+          v-on:mouseenter="onmouseEnterdes(2)"
+          v-on:mouseleave="onmouseLeavedes(2)"
           pos="2"
           :is="currentComponent3"
         />
         <component
           v-on:click="animateElement(3)"
+          v-on:mouseenter="onmouseEnterdes(3)"
+          v-on:mouseleave="onmouseLeavedes(3)"
           pos="3"
           :is="currentComponent4"
         />
         <component
           v-on:click="animateElement(4)"
+          v-on:mouseenter="onmouseEnterdes(4)"
+          v-on:mouseleave="onmouseLeavedes(4)"
           pos="4"
           :is="currentComponent5"
         />
@@ -875,6 +900,8 @@ export default defineComponent({
             botOnclickcard(5);
             topOnselecttarget(5);
           "
+          v-on:mouseenter="onmouseEnterdes(5)"
+          v-on:mouseleave="onmouseLeavedes(5)"
           pos="5"
           :is="activeCard1"
         />
@@ -883,6 +910,8 @@ export default defineComponent({
             botOnclickcard(6);
             topOnselecttarget(6);
           "
+          v-on:mouseenter="onmouseEnterdes(6)"
+          v-on:mouseleave="onmouseLeavedes(6)"
           pos="6"
           :is="activeCard2"
         />
@@ -891,6 +920,8 @@ export default defineComponent({
             botOnclickcard(7);
             topOnselecttarget(7);
           "
+          v-on:mouseenter="onmouseEnterdes(7)"
+          v-on:mouseleave="onmouseLeavedes(7)"
           pos="7"
           :is="activeCard3"
         />
@@ -899,6 +930,8 @@ export default defineComponent({
             botOnclickcard(8);
             topOnselecttarget(8);
           "
+          v-on:mouseenter="onmouseEnterdes(8)"
+          v-on:mouseleave="onmouseLeavedes(8)"
           pos="8"
           :is="activeCard4"
         />
@@ -907,9 +940,27 @@ export default defineComponent({
             botOnclickcard(9);
             topOnselecttarget(9);
           "
+          v-on:mouseenter="onmouseEnterdes(9)"
+          v-on:mouseleave="onmouseLeavedes(9)"
           pos="9"
           :is="activeCard5"
         />
+      </div>
+    </div>
+
+    <!-- card description on hover (very big component due to my lazyness) -->
+    <div
+      v-bind:class="{
+        visible: this.onhovercard,
+        invisible: !this.onhovercard,
+      }"
+      class="bg-indigo-900 absolute ml-4 p-2 top-[50%] border-solid border-white border-2"
+    >
+      <div class="bg-transparent">
+        <div class="bg-inherit">Name: {{ statedes.cardname }}</div>
+        <div class="bg-inherit">Cost: {{ statedes.cardcost }}</div>
+        <div class="bg-inherit">Hp: {{ statedes.cardhp }}</div>
+        <div class="bg-inherit">Atk: {{ statedes.cardatk }}</div>
       </div>
     </div>
 
