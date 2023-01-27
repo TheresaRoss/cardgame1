@@ -53,8 +53,17 @@ export default defineComponent({
       sound.volume = 0.7;
       sound.play();
 
+      //u can draw on your turn only
+      if (!this.gamemech.whoseTurn) {
+        return;
+      }
+
       //minus draw cost
+      if (this.infotop.money < 10) {
+        return;
+      }
       this.infotop.money -= 10;
+
       if (this.topOnhand1) {
         this.drawTop2();
 
@@ -163,7 +172,15 @@ export default defineComponent({
       sound.volume = 0.7;
       sound.play();
 
+      //u can draw on your turn only
+      if (this.gamemech.whoseTurn) {
+        return;
+      }
+
       //minus draw cost
+      if (this.infobot.money < 10) {
+        return;
+      }
       this.infobot.money -= 10;
       if (this.currentComponent) {
         this.createNewComponent2();
@@ -279,6 +296,15 @@ export default defineComponent({
       const sound = new Audio("/src/assets/sound/youdumb.mp3");
       sound.volume = 0.5;
       sound.play();
+
+      //u can play on your turn only
+      if (this.gamemech.whoseTurn) {
+        return;
+      }
+
+      if (this.infobot.money < this.infobot.cardcost[posq]) {
+        return;
+      }
 
       this.infobot.money -= this.infobot.cardcost[posq];
 
@@ -445,7 +471,15 @@ export default defineComponent({
       const sound = new Audio("/src/assets/sound/youdumb.mp3");
       sound.volume = 0.5;
       sound.play();
+
+      //u can play on your turn only
+      if (!this.gamemech.whoseTurn) {
+        return;
+      }
       //play card minus money
+      if (this.infotop.money < this.infotop.cardcost[posq]) {
+        return;
+      }
       this.infotop.money -= this.infotop.cardcost[posq];
 
       if (this.activetopCard1) {
