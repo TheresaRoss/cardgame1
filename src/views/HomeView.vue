@@ -805,6 +805,16 @@ export default defineComponent({
       this.statedes.cardatk = this.infobot.cardatk[pos];
       this.statedes.cardcost = this.infobot.cardcost[pos];
       this.statedes.cardhp = this.infobot.cardhp[pos];
+      this.statedes.cardremainatk = this.infobot.abletoatk[pos];
+    },
+    onmouseEnterTdes(pos) {
+      this.onhovercard = true;
+      // console.log(this.statedes.cardname);
+      this.statedes.cardname = this.infotop.cardname[pos];
+      this.statedes.cardatk = this.infotop.cardatk[pos];
+      this.statedes.cardcost = this.infotop.cardcost[pos];
+      this.statedes.cardhp = this.infotop.cardhp[pos];
+      this.statedes.cardremainatk = this.infotop.abletoatk[pos];
     },
     onmouseLeavedes(pos) {
       this.onhovercard = false;
@@ -818,11 +828,41 @@ export default defineComponent({
     <!-- Card on hand for top player -->
     <div class="flex justify-center absolute top-0 scale-[0.6] inset-x-0">
       <div class="flex justify-center">
-        <component pos="0" v-on:click="useCardtop(0)" :is="topOnhand1" />
-        <component pos="1" v-on:click="useCardtop(1)" :is="topOnhand2" />
-        <component pos="2" v-on:click="useCardtop(2)" :is="topOnhand3" />
-        <component pos="3" v-on:click="useCardtop(3)" :is="topOnhand4" />
-        <component pos="4" v-on:click="useCardtop(4)" :is="topOnhand5" />
+        <component
+          pos="0"
+          v-on:click="useCardtop(0)"
+          v-on:mouseenter="onmouseEnterTdes(0)"
+          v-on:mouseleave="onmouseLeavedes(0)"
+          :is="topOnhand1"
+        />
+        <component
+          pos="1"
+          v-on:click="useCardtop(1)"
+          v-on:mouseenter="onmouseEnterTdes(1)"
+          v-on:mouseleave="onmouseLeavedes(0)"
+          :is="topOnhand2"
+        />
+        <component
+          pos="2"
+          v-on:click="useCardtop(2)"
+          v-on:mouseenter="onmouseEnterTdes(2)"
+          v-on:mouseleave="onmouseLeavedes(0)"
+          :is="topOnhand3"
+        />
+        <component
+          pos="3"
+          v-on:click="useCardtop(3)"
+          v-on:mouseenter="onmouseEnterTdes(3)"
+          v-on:mouseleave="onmouseLeavedes(0)"
+          :is="topOnhand4"
+        />
+        <component
+          pos="4"
+          v-on:click="useCardtop(4)"
+          v-on:mouseenter="onmouseEnterTdes(4)"
+          v-on:mouseleave="onmouseLeavedes(0)"
+          :is="topOnhand5"
+        />
       </div>
     </div>
 
@@ -835,6 +875,8 @@ export default defineComponent({
             botOnselecttarget(5);
             topOnclickcard(5);
           "
+          v-on:mouseenter="onmouseEnterTdes(5)"
+          v-on:mouseleave="onmouseLeavedes(0)"
           :is="activetopCard1"
         />
         <component
@@ -843,6 +885,8 @@ export default defineComponent({
             botOnselecttarget(6);
             topOnclickcard(6);
           "
+          v-on:mouseenter="onmouseEnterTdes(6)"
+          v-on:mouseleave="onmouseLeavedes(0)"
           :is="activetopCard2"
         />
         <component
@@ -851,6 +895,8 @@ export default defineComponent({
             botOnselecttarget(7);
             topOnclickcard(7);
           "
+          v-on:mouseenter="onmouseEnterTdes(7)"
+          v-on:mouseleave="onmouseLeavedes(0)"
           :is="activetopCard3"
         />
         <component
@@ -859,6 +905,8 @@ export default defineComponent({
             botOnselecttarget(8);
             topOnclickcard(8);
           "
+          v-on:mouseenter="onmouseEnterTdes(8)"
+          v-on:mouseleave="onmouseLeavedes(0)"
           :is="activetopCard4"
         />
         <component
@@ -867,6 +915,8 @@ export default defineComponent({
             botOnselecttarget(9);
             topOnclickcard(9);
           "
+          v-on:mouseenter="onmouseEnterTdes(9)"
+          v-on:mouseleave="onmouseLeavedes(0)"
           :is="activetopCard5"
         />
       </div>
@@ -984,6 +1034,7 @@ export default defineComponent({
         <div class="bg-inherit">Cost: {{ statedes.cardcost }}</div>
         <div class="bg-inherit">Hp: {{ statedes.cardhp }}</div>
         <div class="bg-inherit">Atk: {{ statedes.cardatk }}</div>
+        <div class="bg-inherit">Remain Atk: {{ statedes.cardremainatk }}</div>
       </div>
     </div>
 

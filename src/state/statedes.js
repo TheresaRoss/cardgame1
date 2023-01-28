@@ -9,6 +9,7 @@ export const stateDes = defineStore({
     cardatk:'10',
     cardcost:'0',
     cardhp: '0',
+    cardremainatk: '0'
 
 
 
