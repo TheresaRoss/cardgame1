@@ -55,7 +55,6 @@ export default defineComponent({
     drawTop() {
       const sound = new Audio("/src/assets/sound/wargoddaimubai.mp3");
       sound.volume = 0.7;
-      sound.play();
 
       //u can draw on your turn only
       if (!this.gamemech.whoseTurn) {
@@ -66,6 +65,8 @@ export default defineComponent({
       if (this.infotop.money < 10) {
         return;
       }
+
+      sound.play();
       this.infotop.money -= 10;
 
       if (this.topOnhand1) {
@@ -174,7 +175,6 @@ export default defineComponent({
     createNewComponent() {
       const sound = new Audio("/src/assets/sound/wargoddaimubai.mp3");
       sound.volume = 0.7;
-      sound.play();
 
       //u can draw on your turn only
       if (this.gamemech.whoseTurn) {
@@ -185,6 +185,7 @@ export default defineComponent({
       if (this.infobot.money < 10) {
         return;
       }
+      sound.play();
       this.infobot.money -= 10;
       if (this.currentComponent) {
         this.createNewComponent2();
@@ -299,7 +300,6 @@ export default defineComponent({
       const posq = parseInt(pos);
       const sound = new Audio("/src/assets/sound/youdumb.mp3");
       sound.volume = 0.5;
-      sound.play();
 
       //u can play on your turn only
       if (this.gamemech.whoseTurn) {
@@ -309,6 +309,8 @@ export default defineComponent({
       if (this.infobot.money < this.infobot.cardcost[posq]) {
         return;
       }
+
+      sound.play(); //play sound when valid
 
       this.infobot.money -= this.infobot.cardcost[posq];
 
@@ -323,6 +325,7 @@ export default defineComponent({
               this.infobot.cardpassive[9] = this.infobot.cardpassive[posq];
               this.infobot.picture[9] = this.infobot.picture[posq];
               this.infobot.cardcost[9] = this.infobot.cardcost[posq];
+              this.infobot.abletoatk[9] = 0;
               switch (posq) {
                 case 0:
                   this.currentComponent = null;
@@ -353,6 +356,7 @@ export default defineComponent({
             this.infobot.cardpassive[8] = this.infobot.cardpassive[posq];
             this.infobot.picture[8] = this.infobot.picture[posq];
             this.infobot.cardcost[8] = this.infobot.cardcost[posq];
+            this.infobot.abletoatk[8] = 0;
             switch (posq) {
               case 0:
                 this.currentComponent = null;
@@ -383,6 +387,7 @@ export default defineComponent({
           this.infobot.cardpassive[7] = this.infobot.cardpassive[posq];
           this.infobot.picture[7] = this.infobot.picture[posq];
           this.infobot.cardcost[7] = this.infobot.cardcost[posq];
+          this.infobot.abletoatk[7] = 0;
 
           switch (posq) {
             case 0:
@@ -414,6 +419,7 @@ export default defineComponent({
         this.infobot.cardpassive[6] = this.infobot.cardpassive[posq];
         this.infobot.picture[6] = this.infobot.picture[posq];
         this.infobot.cardcost[6] = this.infobot.cardcost[posq];
+        this.infobot.abletoatk[6] = 0;
 
         switch (posq) {
           case 0:
@@ -445,6 +451,7 @@ export default defineComponent({
       this.infobot.cardpassive[5] = this.infobot.cardpassive[posq];
       this.infobot.picture[5] = this.infobot.picture[posq];
       this.infobot.cardcost[5] = this.infobot.cardcost[posq];
+      this.infobot.abletoatk[5] = 0;
       switch (posq) {
         case 0:
           this.currentComponent = null;
@@ -474,7 +481,6 @@ export default defineComponent({
       const posq = parseInt(pos);
       const sound = new Audio("/src/assets/sound/youdumb.mp3");
       sound.volume = 0.5;
-      sound.play();
 
       //u can play on your turn only
       if (!this.gamemech.whoseTurn) {
@@ -485,6 +491,8 @@ export default defineComponent({
         return;
       }
       this.infotop.money -= this.infotop.cardcost[posq];
+
+      sound.play(); //play sound only when it valid
 
       if (this.activetopCard1) {
         if (this.activetopCard2) {
@@ -497,6 +505,7 @@ export default defineComponent({
               this.infotop.cardpassive[9] = this.infotop.cardpassive[posq];
               this.infotop.picture[9] = this.infotop.picture[posq];
               this.infotop.cardcost[9] = this.infotop.cardcost[posq];
+              this.infotop.abletoatk[9] = 0;
               switch (posq) {
                 case 0:
                   this.topOnhand1 = null;
@@ -527,6 +536,7 @@ export default defineComponent({
             this.infotop.cardpassive[8] = this.infotop.cardpassive[posq];
             this.infotop.picture[8] = this.infotop.picture[posq];
             this.infotop.cardcost[8] = this.infotop.cardcost[posq];
+            this.infotop.abletoatk[8] = 0;
             switch (posq) {
               case 0:
                 this.topOnhand1 = null;
@@ -557,6 +567,7 @@ export default defineComponent({
           this.infotop.cardpassive[7] = this.infotop.cardpassive[posq];
           this.infotop.picture[7] = this.infotop.picture[posq];
           this.infotop.cardcost[7] = this.infotop.cardcost[posq];
+          this.infotop.abletoatk[7] = 0;
           switch (posq) {
             case 0:
               this.topOnhand1 = null;
@@ -587,6 +598,7 @@ export default defineComponent({
         this.infotop.cardpassive[6] = this.infotop.cardpassive[posq];
         this.infotop.picture[6] = this.infotop.picture[posq];
         this.infotop.cardcost[6] = this.infotop.cardcost[posq];
+        this.infotop.abletoatk[6] = 0;
         switch (posq) {
           case 0:
             this.topOnhand1 = null;
@@ -617,6 +629,7 @@ export default defineComponent({
       this.infotop.cardpassive[5] = this.infotop.cardpassive[posq];
       this.infotop.picture[5] = this.infotop.picture[posq];
       this.infotop.cardcost[5] = this.infotop.cardcost[posq];
+      this.infotop.abletoatk[5] = 0;
 
       //dont know how to concen string to varieble, using eval will result
       //in copy, and that won't change the real component to null
@@ -647,6 +660,9 @@ export default defineComponent({
     //onClicktoAttack
     botOnclickcard(pos) {
       if (!this.gamemech.whoseTurn) {
+        if (this.infobot.abletoatk[pos] === 0) {
+          return;
+        }
         if (this.botplayerclickStatus === 0) {
           this.botplayerclickStatus = 1;
           //set style
@@ -666,6 +682,7 @@ export default defineComponent({
         const sound1 = new Audio("/src/assets/sound/nopunch.mp3");
 
         sound1.play();
+        this.infobot.abletoatk[this.activebotCardpos] -= 1; //reduce atk time 1
         //calculate and update dmg
         this.infotop.cardhp[pos] -= this.infobot.cardatk[this.activebotCardpos];
         //console.log("attacked!");
@@ -708,6 +725,9 @@ export default defineComponent({
     //onClicktoAttack
     topOnclickcard(pos) {
       if (this.gamemech.whoseTurn) {
+        if (this.infotop.abletoatk[pos] === 0) {
+          return;
+        }
         if (this.topplayerclickStatus === 0) {
           this.topplayerclickStatus = 1;
           this.activetopCardpos = pos;
@@ -726,6 +746,7 @@ export default defineComponent({
 
         sound1.play();
         //calculate and update dmg
+        this.infotop.abletoatk[this.activetopCardpos] -= 1; //reduce atk time 1
         this.infobot.cardhp[pos] -= this.infotop.cardatk[this.activetopCardpos];
         //console.log("attacked!");
 
@@ -764,6 +785,7 @@ export default defineComponent({
     },
     topEndturn() {
       this.topplayerclickStatus = 0;
+      this.infotop.abletoatk.fill(1); //reset atk status
       this.infobot.money += 10;
       this.infotop.active.fill(false);
 
@@ -771,6 +793,7 @@ export default defineComponent({
     },
     botEndturn() {
       this.botplayerclickStatus = 0;
+      this.infobot.abletoatk.fill(1);
       this.infotop.money += 10; //add money
       this.infobot.active.fill(false);
       this.gamemech.increaseTurn();
