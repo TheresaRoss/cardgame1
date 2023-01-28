@@ -15,6 +15,11 @@ import Cardbase2 from "../components/Cardbase2.vue";
 <script>
 export default defineComponent({
   setup() {},
+  computed: {
+    hpPer() {
+      return this.topplayerhpper + "%";
+    },
+  },
   data() {
     return {
       currentComponent: null,
@@ -49,6 +54,10 @@ export default defineComponent({
       gamemech: gameMech(),
       onhovercard: false,
       statedes: stateDes(),
+      topplayerhpper: 100,
+      botplayerhpper: 100,
+      canatktopplayer: false,
+      canatkbotplayer: false,
     };
   },
   methods: {
@@ -669,6 +678,17 @@ export default defineComponent({
           this.infobot.active[pos] = true;
 
           this.activebotCardpos = pos;
+
+          //check if bot can attack top player directly? by checking active card for top
+          if (
+            this.activetopCard1 === null &&
+            this.activetopCard2 === null &&
+            this.activetopCard3 === null &&
+            this.activetopCard4 === null &&
+            this.activetopCard5 === null
+          ) {
+            this.canatktopplayer = true;
+          }
         } else if (this.botplayerclickStatus === 1) {
           this.activebotCardpos = pos;
         }
@@ -783,6 +803,26 @@ export default defineComponent({
         return;
       }
     },
+    //attack top player directly
+    attackTopplayer() {
+      if (this.botplayerclickStatus === 1) {
+        //console.log("I : ", this.activebotCardpos, "Will attack: ", pos);
+
+        var sound1 = new Audio("/src/assets/sound/nopunch.mp3");
+
+        sound1.play();
+        //calculate and update dmg
+        this.infobot.abletoatk[this.activebotCardpos] -= 1; //reduce atk time 1
+        this.infotop.playerhp -= this.infobot.cardatk[this.activebotCardpos];
+        this.topplayerhpper = (this.infotop.playerhp * 100) / 200; //calculate as percent
+        console.log("hp: ", this.topplayerhpper);
+        //console.log("now ", this.hpPer);
+
+        this.infobot.active[this.activebotCardpos] = false;
+        this.botplayerclickStatus = 0;
+        this.activebotCardpos = 0;
+      }
+    },
     topEndturn() {
       this.topplayerclickStatus = 0;
       this.infotop.abletoatk.fill(1); //reset atk status
@@ -794,6 +834,7 @@ export default defineComponent({
     botEndturn() {
       this.botplayerclickStatus = 0;
       this.infobot.abletoatk.fill(1);
+      this.canatktopplayer = false; //reset atk top player
       this.infotop.money += 10; //add money
       this.infobot.active.fill(false);
       this.gamemech.increaseTurn();
@@ -825,6 +866,26 @@ export default defineComponent({
 
 <template>
   <main>
+    <!-- topplayer hp bar -->
+    <div class="flex absolute items-center mt-5 w-[15%] top-0 left-[25%]">
+      <div
+        v-bind:class="{
+          visible: this.canatktopplayer,
+          invisible: !this.canatktopplayer,
+        }"
+        v-on:click="attackTopplayer"
+        class="w-8 h-8 bg-white mr-5"
+      ></div>
+      <!-- this is a top player attack place-->
+      <div class="w-full bg-white rounded-full h-2.5">
+        <div
+          class="bg-red-600 h-2.5 rounded-full"
+          v-bind:style="{ width: hpPer }"
+        ></div>
+        <!--Very nice way of binding variable with style-->
+      </div>
+    </div>
+
     <!-- Card on hand for top player -->
     <div class="flex justify-center absolute top-0 scale-[0.6] inset-x-0">
       <div class="flex justify-center">
