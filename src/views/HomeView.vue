@@ -811,6 +811,9 @@ export default defineComponent({
         var sound1 = new Audio("/src/assets/sound/nopunch.mp3");
 
         sound1.play();
+        const sound2 = new Audio("/src/assets/sound/crazylaugh.mp3");
+
+        sound2.play();
         //calculate and update dmg
         this.infobot.abletoatk[this.activebotCardpos] -= 1; //reduce atk time 1
         this.infotop.playerhp -= this.infobot.cardatk[this.activebotCardpos];
