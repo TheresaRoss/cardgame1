@@ -19,6 +19,9 @@ export default defineComponent({
     hpPer() {
       return this.topplayerhpper + "%";
     },
+    hpPer2() {
+      return this.botplayerhpper + "%";
+    },
   },
   data() {
     return {
@@ -744,6 +747,7 @@ export default defineComponent({
 
     //onClicktoAttack
     topOnclickcard(pos) {
+      //console.log("can>", this.canatkbotplayer);
       if (this.gamemech.whoseTurn) {
         if (this.infotop.abletoatk[pos] === 0) {
           return;
@@ -751,6 +755,17 @@ export default defineComponent({
         if (this.topplayerclickStatus === 0) {
           this.topplayerclickStatus = 1;
           this.activetopCardpos = pos;
+
+          //check if top can attack bot player directly? by checking active card for top
+          if (
+            this.activeCard1 === null &&
+            this.activeCard2 === null &&
+            this.activeCard3 === null &&
+            this.activeCard4 === null &&
+            this.activeCard5 === null
+          ) {
+            this.canatkbotplayer = true;
+          }
 
           this.infotop.active[pos] = true;
         } else if (this.topplayerclickStatus === 1) {
@@ -826,6 +841,28 @@ export default defineComponent({
         this.activebotCardpos = 0;
       }
     },
+    attackBotplayer() {
+      if (this.topplayerclickStatus === 1) {
+        //console.log("I : ", this.activebotCardpos, "Will attack: ", pos);
+
+        var sound1 = new Audio("/src/assets/sound/nopunch.mp3");
+
+        sound1.play();
+        const sound2 = new Audio("/src/assets/sound/crazylaugh.mp3");
+
+        sound2.play();
+        //calculate and update dmg
+        this.infotop.abletoatk[this.activetopCardpos] -= 1; //reduce atk time 1
+        this.infobot.playerhp -= this.infotop.cardatk[this.activetopCardpos];
+        this.botplayerhpper = (this.infobot.playerhp * 100) / 200; //calculate as percent
+        //console.log("hp: ", this.infobot.playerhp);
+        //console.log("now ", this.hpPer);
+
+        this.infotop.active[this.activetopCardpos] = false;
+        this.topplayerclickStatus = 0;
+        this.activetopCardpos = 0;
+      }
+    },
     topEndturn() {
       this.topplayerclickStatus = 0;
       this.infotop.abletoatk.fill(1); //reset atk status
@@ -884,6 +921,26 @@ export default defineComponent({
         <div
           class="bg-red-600 h-2.5 rounded-full"
           v-bind:style="{ width: hpPer }"
+        ></div>
+        <!--Very nice way of binding variable with style-->
+      </div>
+    </div>
+
+    <!-- botplayer hp bar -->
+    <div class="flex absolute items-center w-[15%] bottom-0 right-[25%]">
+      <div
+        v-bind:class="{
+          visible: this.canatkbotplayer,
+          invisible: !this.canatkbotplayer,
+        }"
+        v-on:click="attackBotplayer"
+        class="w-8 h-8 bg-white mr-5"
+      ></div>
+      <!-- this is a bot player attack place-->
+      <div class="w-full bg-white rounded-full h-2.5">
+        <div
+          class="bg-red-600 h-2.5 rounded-full"
+          v-bind:style="{ width: hpPer2 }"
         ></div>
         <!--Very nice way of binding variable with style-->
       </div>
