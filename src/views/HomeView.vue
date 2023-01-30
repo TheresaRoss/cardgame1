@@ -8,6 +8,7 @@ import { useCounterStore } from "../state/stateforbot";
 import { useAllcard } from "../state/allcard";
 import { topPlayer } from "../state/statefortop";
 import { gameMech } from "../state/gamemech";
+import Menu from "../components/Menu.vue";
 
 import Cardbase2 from "../components/Cardbase2.vue";
 </script>
@@ -25,6 +26,7 @@ export default defineComponent({
   },
   data() {
     return {
+      gamestate: 0,
       currentComponent: null,
       currentComponent2: null,
       currentComponent3: null,
@@ -906,327 +908,344 @@ export default defineComponent({
 
 <template>
   <main>
-    <!-- topplayer hp bar -->
-    <div class="flex absolute items-center mt-5 w-[15%] top-0 left-[25%]">
+    <!-- Menu Component -->
+    <div
+      v-bind:class="{
+        visible: this.gamestate === 0,
+        invisible: this.gamestate !== 0,
+      }"
+    >
+      <Menu v-bind:gamestate="gamestate" v-on:update="gamestate = 1" />
+    </div>
+    <!-- Game component -->
+    <div
+      v-bind:class="{
+        visible: this.gamestate === 1,
+        invisible: this.gamestate !== 1,
+      }"
+    >
+      <!-- topplayer hp bar -->
+      <div class="flex absolute items-center mt-5 w-[15%] top-0 left-[25%]">
+        <div
+          v-bind:class="{
+            visible: this.canatktopplayer,
+            invisible: !this.canatktopplayer,
+          }"
+          v-on:click="attackTopplayer"
+          class="w-8 h-8 bg-white mr-5"
+        ></div>
+        <!-- this is a top player attack place-->
+        <div class="w-full bg-white rounded-full h-2.5">
+          <div
+            class="bg-red-600 h-2.5 rounded-full"
+            v-bind:style="{ width: hpPer }"
+          ></div>
+          <!--Very nice way of binding variable with style-->
+        </div>
+      </div>
+
+      <!-- botplayer hp bar -->
+      <div class="flex absolute items-center w-[15%] bottom-0 right-[25%]">
+        <div
+          v-bind:class="{
+            visible: this.canatkbotplayer,
+            invisible: !this.canatkbotplayer,
+          }"
+          v-on:click="attackBotplayer"
+          class="w-8 h-8 bg-white mr-5"
+        ></div>
+        <!-- this is a bot player attack place-->
+        <div class="w-full bg-white rounded-full h-2.5">
+          <div
+            class="bg-red-600 h-2.5 rounded-full"
+            v-bind:style="{ width: hpPer2 }"
+          ></div>
+          <!--Very nice way of binding variable with style-->
+        </div>
+      </div>
+
+      <!-- Card on hand for top player -->
+      <div class="flex justify-center absolute top-0 scale-[0.6] inset-x-0">
+        <div class="flex justify-center">
+          <component
+            pos="0"
+            v-on:click="useCardtop(0)"
+            v-on:mouseenter="onmouseEnterTdes(0)"
+            v-on:mouseleave="onmouseLeavedes(0)"
+            :is="topOnhand1"
+          />
+          <component
+            pos="1"
+            v-on:click="useCardtop(1)"
+            v-on:mouseenter="onmouseEnterTdes(1)"
+            v-on:mouseleave="onmouseLeavedes(0)"
+            :is="topOnhand2"
+          />
+          <component
+            pos="2"
+            v-on:click="useCardtop(2)"
+            v-on:mouseenter="onmouseEnterTdes(2)"
+            v-on:mouseleave="onmouseLeavedes(0)"
+            :is="topOnhand3"
+          />
+          <component
+            pos="3"
+            v-on:click="useCardtop(3)"
+            v-on:mouseenter="onmouseEnterTdes(3)"
+            v-on:mouseleave="onmouseLeavedes(0)"
+            :is="topOnhand4"
+          />
+          <component
+            pos="4"
+            v-on:click="useCardtop(4)"
+            v-on:mouseenter="onmouseEnterTdes(4)"
+            v-on:mouseleave="onmouseLeavedes(0)"
+            :is="topOnhand5"
+          />
+        </div>
+      </div>
+
+      <!-- Active card for top player -->
+      <div class="flex justify-center absolute scale-[0.7] top-[25%] inset-x-0">
+        <div class="flex justify-center">
+          <component
+            pos="5"
+            v-on:click="
+              botOnselecttarget(5);
+              topOnclickcard(5);
+            "
+            v-on:mouseenter="onmouseEnterTdes(5)"
+            v-on:mouseleave="onmouseLeavedes(0)"
+            :is="activetopCard1"
+          />
+          <component
+            pos="6"
+            v-on:click="
+              botOnselecttarget(6);
+              topOnclickcard(6);
+            "
+            v-on:mouseenter="onmouseEnterTdes(6)"
+            v-on:mouseleave="onmouseLeavedes(0)"
+            :is="activetopCard2"
+          />
+          <component
+            pos="7"
+            v-on:click="
+              botOnselecttarget(7);
+              topOnclickcard(7);
+            "
+            v-on:mouseenter="onmouseEnterTdes(7)"
+            v-on:mouseleave="onmouseLeavedes(0)"
+            :is="activetopCard3"
+          />
+          <component
+            pos="8"
+            v-on:click="
+              botOnselecttarget(8);
+              topOnclickcard(8);
+            "
+            v-on:mouseenter="onmouseEnterTdes(8)"
+            v-on:mouseleave="onmouseLeavedes(0)"
+            :is="activetopCard4"
+          />
+          <component
+            pos="9"
+            v-on:click="
+              botOnselecttarget(9);
+              topOnclickcard(9);
+            "
+            v-on:mouseenter="onmouseEnterTdes(9)"
+            v-on:mouseleave="onmouseLeavedes(0)"
+            :is="activetopCard5"
+          />
+        </div>
+      </div>
+
+      <!-- card on hand for bot player -->
+
+      <div
+        class="flex justify-center absolute bottom-[-1rem] scale-[0.6] inset-x-0"
+      >
+        <div class="flex justify-center">
+          <component
+            v-on:click="animateElement(0)"
+            v-on:mouseenter="onmouseEnterdes(0)"
+            v-on:mouseleave="onmouseLeavedes(0)"
+            pos="0"
+            :is="currentComponent"
+          />
+          <component
+            v-on:click="animateElement(1)"
+            v-on:mouseenter="onmouseEnterdes(1)"
+            v-on:mouseleave="onmouseLeavedes(1)"
+            pos="1"
+            :is="currentComponent2"
+          />
+          <component
+            v-on:click="animateElement(2)"
+            v-on:mouseenter="onmouseEnterdes(2)"
+            v-on:mouseleave="onmouseLeavedes(2)"
+            pos="2"
+            :is="currentComponent3"
+          />
+          <component
+            v-on:click="animateElement(3)"
+            v-on:mouseenter="onmouseEnterdes(3)"
+            v-on:mouseleave="onmouseLeavedes(3)"
+            pos="3"
+            :is="currentComponent4"
+          />
+          <component
+            v-on:click="animateElement(4)"
+            v-on:mouseenter="onmouseEnterdes(4)"
+            v-on:mouseleave="onmouseLeavedes(4)"
+            pos="4"
+            :is="currentComponent5"
+          />
+        </div>
+      </div>
+      <!-- Active card for bot player -->
+      <div class="flex justify-center absolute scale-[0.7] top-[50%] inset-x-0">
+        <div class="flex justify-center">
+          <component
+            v-on:click="
+              botOnclickcard(5);
+              topOnselecttarget(5);
+            "
+            v-on:mouseenter="onmouseEnterdes(5)"
+            v-on:mouseleave="onmouseLeavedes(5)"
+            pos="5"
+            :is="activeCard1"
+          />
+          <component
+            v-on:click="
+              botOnclickcard(6);
+              topOnselecttarget(6);
+            "
+            v-on:mouseenter="onmouseEnterdes(6)"
+            v-on:mouseleave="onmouseLeavedes(6)"
+            pos="6"
+            :is="activeCard2"
+          />
+          <component
+            v-on:click="
+              botOnclickcard(7);
+              topOnselecttarget(7);
+            "
+            v-on:mouseenter="onmouseEnterdes(7)"
+            v-on:mouseleave="onmouseLeavedes(7)"
+            pos="7"
+            :is="activeCard3"
+          />
+          <component
+            v-on:click="
+              botOnclickcard(8);
+              topOnselecttarget(8);
+            "
+            v-on:mouseenter="onmouseEnterdes(8)"
+            v-on:mouseleave="onmouseLeavedes(8)"
+            pos="8"
+            :is="activeCard4"
+          />
+          <component
+            v-on:click="
+              botOnclickcard(9);
+              topOnselecttarget(9);
+            "
+            v-on:mouseenter="onmouseEnterdes(9)"
+            v-on:mouseleave="onmouseLeavedes(9)"
+            pos="9"
+            :is="activeCard5"
+          />
+        </div>
+      </div>
+
+      <!-- card description on hover (very big component due to my lazyness) -->
       <div
         v-bind:class="{
-          visible: this.canatktopplayer,
-          invisible: !this.canatktopplayer,
+          visible: this.onhovercard,
+          invisible: !this.onhovercard,
         }"
-        v-on:click="attackTopplayer"
-        class="w-8 h-8 bg-white mr-5"
-      ></div>
-      <!-- this is a top player attack place-->
-      <div class="w-full bg-white rounded-full h-2.5">
-        <div
-          class="bg-red-600 h-2.5 rounded-full"
-          v-bind:style="{ width: hpPer }"
-        ></div>
-        <!--Very nice way of binding variable with style-->
+        class="bg-indigo-900 absolute ml-4 p-2 top-[50%] border-solid border-white border-2"
+      >
+        <div class="bg-transparent">
+          <div class="bg-inherit">Name: {{ statedes.cardname }}</div>
+          <div class="bg-inherit">Cost: {{ statedes.cardcost }}</div>
+          <div class="bg-inherit">Hp: {{ statedes.cardhp }}</div>
+          <div class="bg-inherit">Atk: {{ statedes.cardatk }}</div>
+          <div class="bg-inherit">Remain Atk: {{ statedes.cardremainatk }}</div>
+        </div>
       </div>
-    </div>
 
-    <!-- botplayer hp bar -->
-    <div class="flex absolute items-center w-[15%] bottom-0 right-[25%]">
+      <!-- money label for top -->
+      <div class="absolute left-0 top-[25%]">
+        <div class="text-2xl">MONEY FOR TOP LA: {{ infotop.money }}</div>
+      </div>
+
+      <!-- Money label for bot -->
+      <div class="absolute left-0 top-[75%]">
+        <div class="text-2xl">MONEY FOR TOP LA: {{ infobot.money }}</div>
+      </div>
+
+      <!-- Deck for top player -->
+      <div class="absolute top-0 right-5">
+        <div
+          class="absolute mt-2 ml-7 rounded-full w-10 h-10 bg-yellow-400 text-black justify-center flex items-center"
+        >
+          50
+        </div>
+        <div v-on:click="drawTop" class="w-28 h-40 m-5">
+          <Deck />
+        </div>
+      </div>
+      <!-- Deck for bot player -->
+      <div class="absolute bottom-0 right-5">
+        <div
+          class="absolute mt-2 ml-7 rounded-full w-10 h-10 bg-yellow-400 text-black justify-center flex items-center"
+        >
+          50
+        </div>
+        <div v-on:click="createNewComponent" class="w-28 h-40 m-5">
+          <Deck />
+        </div>
+      </div>
+
+      <!-- turn manage -->
       <div
         v-bind:class="{
-          visible: this.canatkbotplayer,
-          invisible: !this.canatkbotplayer,
+          visible: this.gamemech.whoseTurn && this.gamestate === 1,
+          invisible: !this.gamemech.whoseTurn,
         }"
-        v-on:click="attackBotplayer"
-        class="w-8 h-8 bg-white mr-5"
+        class="absolute top-[25%] right-0 mr-5"
+      >
+        <button @click="topEndturn" class="px-4 py-2 bg-blue-500">
+          END TURN
+        </button>
+      </div>
+
+      <div
+        v-bind:class="{
+          visible: !this.gamemech.whoseTurn && this.gamestate === 1,
+          invisible: this.gamemech.whoseTurn,
+        }"
+        class="absolute bottom-[25%] right-0 mr-5"
+      >
+        <button @click="botEndturn" class="px-4 py-2 bg-green-500">
+          END TURN
+        </button>
+      </div>
+
+      <!-- turn number and whose turn -->
+      <div
+        v-bind:class="{
+          'absolute mr-5 top top-[50%] right-0 border-x-[40px] rotate-180 border-x-transparent border-b-[40px] border-b-blue-600':
+            !gamemech.whoseTurn,
+          'absolute mr-5 top top-[50%] right-0 border-x-[40px]  border-x-transparent border-b-[40px] border-b-blue-600':
+            gamemech.whoseTurn,
+        }"
       ></div>
-      <!-- this is a bot player attack place-->
-      <div class="w-full bg-white rounded-full h-2.5">
-        <div
-          class="bg-red-600 h-2.5 rounded-full"
-          v-bind:style="{ width: hpPer2 }"
-        ></div>
-        <!--Very nice way of binding variable with style-->
-      </div>
+      <div>Turn Count: {{ gamemech.turnCount }}</div>
+      <div>Whose Turn: {{ gamemech.whoseTurn }}</div>
     </div>
-
-    <!-- Card on hand for top player -->
-    <div class="flex justify-center absolute top-0 scale-[0.6] inset-x-0">
-      <div class="flex justify-center">
-        <component
-          pos="0"
-          v-on:click="useCardtop(0)"
-          v-on:mouseenter="onmouseEnterTdes(0)"
-          v-on:mouseleave="onmouseLeavedes(0)"
-          :is="topOnhand1"
-        />
-        <component
-          pos="1"
-          v-on:click="useCardtop(1)"
-          v-on:mouseenter="onmouseEnterTdes(1)"
-          v-on:mouseleave="onmouseLeavedes(0)"
-          :is="topOnhand2"
-        />
-        <component
-          pos="2"
-          v-on:click="useCardtop(2)"
-          v-on:mouseenter="onmouseEnterTdes(2)"
-          v-on:mouseleave="onmouseLeavedes(0)"
-          :is="topOnhand3"
-        />
-        <component
-          pos="3"
-          v-on:click="useCardtop(3)"
-          v-on:mouseenter="onmouseEnterTdes(3)"
-          v-on:mouseleave="onmouseLeavedes(0)"
-          :is="topOnhand4"
-        />
-        <component
-          pos="4"
-          v-on:click="useCardtop(4)"
-          v-on:mouseenter="onmouseEnterTdes(4)"
-          v-on:mouseleave="onmouseLeavedes(0)"
-          :is="topOnhand5"
-        />
-      </div>
-    </div>
-
-    <!-- Active card for top player -->
-    <div class="flex justify-center absolute scale-[0.7] top-[25%] inset-x-0">
-      <div class="flex justify-center">
-        <component
-          pos="5"
-          v-on:click="
-            botOnselecttarget(5);
-            topOnclickcard(5);
-          "
-          v-on:mouseenter="onmouseEnterTdes(5)"
-          v-on:mouseleave="onmouseLeavedes(0)"
-          :is="activetopCard1"
-        />
-        <component
-          pos="6"
-          v-on:click="
-            botOnselecttarget(6);
-            topOnclickcard(6);
-          "
-          v-on:mouseenter="onmouseEnterTdes(6)"
-          v-on:mouseleave="onmouseLeavedes(0)"
-          :is="activetopCard2"
-        />
-        <component
-          pos="7"
-          v-on:click="
-            botOnselecttarget(7);
-            topOnclickcard(7);
-          "
-          v-on:mouseenter="onmouseEnterTdes(7)"
-          v-on:mouseleave="onmouseLeavedes(0)"
-          :is="activetopCard3"
-        />
-        <component
-          pos="8"
-          v-on:click="
-            botOnselecttarget(8);
-            topOnclickcard(8);
-          "
-          v-on:mouseenter="onmouseEnterTdes(8)"
-          v-on:mouseleave="onmouseLeavedes(0)"
-          :is="activetopCard4"
-        />
-        <component
-          pos="9"
-          v-on:click="
-            botOnselecttarget(9);
-            topOnclickcard(9);
-          "
-          v-on:mouseenter="onmouseEnterTdes(9)"
-          v-on:mouseleave="onmouseLeavedes(0)"
-          :is="activetopCard5"
-        />
-      </div>
-    </div>
-
-    <!-- card on hand for bot player -->
-
-    <div
-      class="flex justify-center absolute bottom-[-1rem] scale-[0.6] inset-x-0"
-    >
-      <div class="flex justify-center">
-        <component
-          v-on:click="animateElement(0)"
-          v-on:mouseenter="onmouseEnterdes(0)"
-          v-on:mouseleave="onmouseLeavedes(0)"
-          pos="0"
-          :is="currentComponent"
-        />
-        <component
-          v-on:click="animateElement(1)"
-          v-on:mouseenter="onmouseEnterdes(1)"
-          v-on:mouseleave="onmouseLeavedes(1)"
-          pos="1"
-          :is="currentComponent2"
-        />
-        <component
-          v-on:click="animateElement(2)"
-          v-on:mouseenter="onmouseEnterdes(2)"
-          v-on:mouseleave="onmouseLeavedes(2)"
-          pos="2"
-          :is="currentComponent3"
-        />
-        <component
-          v-on:click="animateElement(3)"
-          v-on:mouseenter="onmouseEnterdes(3)"
-          v-on:mouseleave="onmouseLeavedes(3)"
-          pos="3"
-          :is="currentComponent4"
-        />
-        <component
-          v-on:click="animateElement(4)"
-          v-on:mouseenter="onmouseEnterdes(4)"
-          v-on:mouseleave="onmouseLeavedes(4)"
-          pos="4"
-          :is="currentComponent5"
-        />
-      </div>
-    </div>
-    <!-- Active card for bot player -->
-    <div class="flex justify-center absolute scale-[0.7] top-[50%] inset-x-0">
-      <div class="flex justify-center">
-        <component
-          v-on:click="
-            botOnclickcard(5);
-            topOnselecttarget(5);
-          "
-          v-on:mouseenter="onmouseEnterdes(5)"
-          v-on:mouseleave="onmouseLeavedes(5)"
-          pos="5"
-          :is="activeCard1"
-        />
-        <component
-          v-on:click="
-            botOnclickcard(6);
-            topOnselecttarget(6);
-          "
-          v-on:mouseenter="onmouseEnterdes(6)"
-          v-on:mouseleave="onmouseLeavedes(6)"
-          pos="6"
-          :is="activeCard2"
-        />
-        <component
-          v-on:click="
-            botOnclickcard(7);
-            topOnselecttarget(7);
-          "
-          v-on:mouseenter="onmouseEnterdes(7)"
-          v-on:mouseleave="onmouseLeavedes(7)"
-          pos="7"
-          :is="activeCard3"
-        />
-        <component
-          v-on:click="
-            botOnclickcard(8);
-            topOnselecttarget(8);
-          "
-          v-on:mouseenter="onmouseEnterdes(8)"
-          v-on:mouseleave="onmouseLeavedes(8)"
-          pos="8"
-          :is="activeCard4"
-        />
-        <component
-          v-on:click="
-            botOnclickcard(9);
-            topOnselecttarget(9);
-          "
-          v-on:mouseenter="onmouseEnterdes(9)"
-          v-on:mouseleave="onmouseLeavedes(9)"
-          pos="9"
-          :is="activeCard5"
-        />
-      </div>
-    </div>
-
-    <!-- card description on hover (very big component due to my lazyness) -->
-    <div
-      v-bind:class="{
-        visible: this.onhovercard,
-        invisible: !this.onhovercard,
-      }"
-      class="bg-indigo-900 absolute ml-4 p-2 top-[50%] border-solid border-white border-2"
-    >
-      <div class="bg-transparent">
-        <div class="bg-inherit">Name: {{ statedes.cardname }}</div>
-        <div class="bg-inherit">Cost: {{ statedes.cardcost }}</div>
-        <div class="bg-inherit">Hp: {{ statedes.cardhp }}</div>
-        <div class="bg-inherit">Atk: {{ statedes.cardatk }}</div>
-        <div class="bg-inherit">Remain Atk: {{ statedes.cardremainatk }}</div>
-      </div>
-    </div>
-
-    <!-- money label for top -->
-    <div class="absolute left-0 top-[25%]">
-      <div class="text-2xl">MONEY FOR TOP LA: {{ infotop.money }}</div>
-    </div>
-
-    <!-- Money label for bot -->
-    <div class="absolute left-0 top-[75%]">
-      <div class="text-2xl">MONEY FOR TOP LA: {{ infobot.money }}</div>
-    </div>
-
-    <!-- Deck for top player -->
-    <div class="absolute top-0 right-5">
-      <div
-        class="absolute mt-2 ml-7 rounded-full w-10 h-10 bg-yellow-400 text-black justify-center flex items-center"
-      >
-        50
-      </div>
-      <div v-on:click="drawTop" class="w-28 h-40 m-5">
-        <Deck />
-      </div>
-    </div>
-    <!-- Deck for bot player -->
-    <div class="absolute bottom-0 right-5">
-      <div
-        class="absolute mt-2 ml-7 rounded-full w-10 h-10 bg-yellow-400 text-black justify-center flex items-center"
-      >
-        50
-      </div>
-      <div v-on:click="createNewComponent" class="w-28 h-40 m-5">
-        <Deck />
-      </div>
-    </div>
-
-    <!-- turn manage -->
-    <div
-      v-bind:class="{
-        visible: this.gamemech.whoseTurn,
-        invisible: !this.gamemech.whoseTurn,
-      }"
-      class="absolute top-[25%] right-0 mr-5"
-    >
-      <button @click="topEndturn" class="px-4 py-2 bg-blue-500">
-        END TURN
-      </button>
-    </div>
-
-    <div
-      v-bind:class="{
-        visible: !this.gamemech.whoseTurn,
-        invisible: this.gamemech.whoseTurn,
-      }"
-      class="absolute bottom-[25%] right-0 mr-5"
-    >
-      <button @click="botEndturn" class="px-4 py-2 bg-green-500">
-        END TURN
-      </button>
-    </div>
-
-    <!-- turn number and whose turn -->
-    <div
-      v-bind:class="{
-        'absolute mr-5 top top-[50%] right-0 border-x-[40px] rotate-180 border-x-transparent border-b-[40px] border-b-blue-600':
-          !gamemech.whoseTurn,
-        'absolute mr-5 top top-[50%] right-0 border-x-[40px]  border-x-transparent border-b-[40px] border-b-blue-600':
-          gamemech.whoseTurn,
-      }"
-    ></div>
-    <div>Turn Count: {{ gamemech.turnCount }}</div>
-    <div>Whose Turn: {{ gamemech.whoseTurn }}</div>
   </main>
 </template>
