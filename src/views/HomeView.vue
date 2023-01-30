@@ -9,6 +9,7 @@ import { useAllcard } from "../state/allcard";
 import { topPlayer } from "../state/statefortop";
 import { gameMech } from "../state/gamemech";
 import Menu from "../components/Menu.vue";
+import Gameover from "../components/Gameover.vue";
 
 import Cardbase2 from "../components/Cardbase2.vue";
 </script>
@@ -26,7 +27,7 @@ export default defineComponent({
   },
   data() {
     return {
-      gamestate: 0,
+      gamestate: 0, //0 = main menu 1 = gameplay 2 = gameover
       currentComponent: null,
       currentComponent2: null,
       currentComponent3: null,
@@ -37,6 +38,7 @@ export default defineComponent({
       activeCard3: null,
       activeCard4: null,
       activeCard5: null,
+      winner: "",
       allnumber: [0, 1, 2, 3, 4],
       numDeckTop: [0, 1, 2, 3, 4],
       infobot: useCounterStore(),
@@ -834,6 +836,11 @@ export default defineComponent({
         //calculate and update dmg
         this.infobot.abletoatk[this.activebotCardpos] -= 1; //reduce atk time 1
         this.infotop.playerhp -= this.infobot.cardatk[this.activebotCardpos];
+        if (this.infotop.playerhp <= 0) {
+          this.gamestate = 2;
+          this.winner = "Bot";
+          return;
+        }
         this.topplayerhpper = (this.infotop.playerhp * 100) / 200; //calculate as percent
         console.log("hp: ", this.topplayerhpper);
         //console.log("now ", this.hpPer);
@@ -856,6 +863,12 @@ export default defineComponent({
         //calculate and update dmg
         this.infotop.abletoatk[this.activetopCardpos] -= 1; //reduce atk time 1
         this.infobot.playerhp -= this.infotop.cardatk[this.activetopCardpos];
+        if (this.infobot.playerhp <= 0) {
+          this.gamestate = 2;
+          //console.log(this.gamestate);
+          this.winner = "Top";
+          return;
+        }
         this.botplayerhpper = (this.infobot.playerhp * 100) / 200; //calculate as percent
         //console.log("hp: ", this.infobot.playerhp);
         //console.log("now ", this.hpPer);
@@ -928,7 +941,7 @@ export default defineComponent({
       <div class="flex absolute items-center mt-5 w-[15%] top-0 left-[25%]">
         <div
           v-bind:class="{
-            visible: this.canatktopplayer,
+            visible: this.canatktopplayer && this.gamestate === 1,
             invisible: !this.canatktopplayer,
           }"
           v-on:click="attackTopplayer"
@@ -948,7 +961,7 @@ export default defineComponent({
       <div class="flex absolute items-center w-[15%] bottom-0 right-[25%]">
         <div
           v-bind:class="{
-            visible: this.canatkbotplayer,
+            visible: this.canatkbotplayer && this.gamestate === 1,
             invisible: !this.canatkbotplayer,
           }"
           v-on:click="attackBotplayer"
@@ -1246,6 +1259,20 @@ export default defineComponent({
       ></div>
       <div>Turn Count: {{ gamemech.turnCount }}</div>
       <div>Whose Turn: {{ gamemech.whoseTurn }}</div>
+    </div>
+    <!-- Gameover Component -->
+    <div
+      class="absolute top-0 inset-x-0"
+      v-bind:class="{
+        visible: this.gamestate === 2,
+        invisible: this.gamestate !== 2,
+      }"
+    >
+      <Gameover
+        :winner="winner"
+        v-bind:gamestate="gamestate"
+        v-on:update="gamestate = 0"
+      />
     </div>
   </main>
 </template>
