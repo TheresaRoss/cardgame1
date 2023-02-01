@@ -10,6 +10,7 @@ import { topPlayer } from "../state/statefortop";
 import { gameMech } from "../state/gamemech";
 import Menu from "../components/Menu.vue";
 import Gameover from "../components/Gameover.vue";
+import ChooseA from "../components/ChooseA.vue";
 
 import Cardbase2 from "../components/Cardbase2.vue";
 </script>
@@ -27,7 +28,7 @@ export default defineComponent({
   },
   data() {
     return {
-      gamestate: 0, //0 = main menu 1 = gameplay 2 = gameover
+      gamestate: 0, //0 = main menu -1 = choosing avatar 1 = gameplay 2 = gameover
       currentComponent: null,
       currentComponent2: null,
       currentComponent3: null,
@@ -928,8 +929,19 @@ export default defineComponent({
         invisible: this.gamestate !== 0,
       }"
     >
-      <Menu v-bind:gamestate="gamestate" v-on:update="gamestate = 1" />
+      <Menu v-bind:gamestate="gamestate" v-on:update="gamestate = -1" />
     </div>
+    <!-- Choosing Avatar Menu -->
+    <div
+      class="absolute top-0 inset-x-0"
+      v-bind:class="{
+        visible: this.gamestate === -1,
+        invisible: this.gamestate !== -1,
+      }"
+    >
+      <ChooseA v-bind:gamestate="gamestate" v-on:update="gamestate = 1" />
+    </div>
+
     <!-- Game component -->
     <div
       v-bind:class="{
