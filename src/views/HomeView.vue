@@ -880,6 +880,7 @@ export default defineComponent({
       }
     },
     topEndturn() {
+      //console.log(this.infobot.$state);
       this.topplayerclickStatus = 0;
       this.infotop.abletoatk.fill(1); //reset atk status
       this.infobot.money += 10;

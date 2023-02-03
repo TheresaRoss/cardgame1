@@ -1,22 +1,47 @@
+<script setup>
+import Mainchabase from "../components/Mainchabase.vue";
+import { useAllcha } from "../state/allcharec";
+import { useCounterStore } from "../state/stateforbot";
+
+import { topPlayer } from "../state/statefortop";
+</script>
+
 <template>
   <div class="">
     <div class="flex justify-center">
-      <div class="grid grid-cols-3 grid-rows-1 gap-8 bg-white row-span-2">
+      <div
+        class="grid mt-10 grid-cols-3 grid-rows-2 gap-8 p-8 bg-white bg-opacity-10 rounded-xl row-span-2"
+      >
         <div
-          class="border-yellow-200 border-4 mr-4 p-4 bg-transparent text-3xl text-red-600 font-bold underline"
+          class="bg-transparent text-3xl text-red-600 font-bold underline"
+          v-on:click="setActivela(0)"
         >
-          Avatar 1
+          <Mainchabase pos="0" />
         </div>
         <div
-          class="border-yellow-200 border-4 mx-4 p-4 bg-transparent text-3xl text-red-600 font-bold underline"
+          class="bg-transparent text-3xl text-red-600 font-bold underline"
+          v-on:click="setActivela(1)"
         >
-          Avatar 2
+          <Mainchabase pos="1" />
         </div>
-        <button
-          class="border-yellow-200 border-4 ml-4 p-4 bg-transparent text-3xl text-red-600 font-bold underline"
+        <div
+          class="bg-transparent text-3xl text-red-600 font-bold underline"
+          v-on:click="setActivela(2)"
         >
-          Avatar 3
-        </button>
+          <Mainchabase pos="2" />
+        </div>
+        <div
+          class="bg-transparent text-3xl text-red-600 font-bold underline"
+          v-on:click="setActivela(3)"
+        >
+          <Mainchabase pos="3" />
+        </div>
+        <div
+          class="bg-transparent text-3xl text-red-600 font-bold underline"
+          v-on:click="setActivela(4)"
+        >
+          <Mainchabase pos="4" />
+        </div>
       </div>
     </div>
     <div class="grid place-items-center grid-cols-1 grid-rows-3">
@@ -34,33 +59,6 @@
           Start
         </button>
       </div>
-
-      <div class="border-white border-4 my-5 p-3 bg-sky-200">
-        <button
-          class="bg-transparent text-3xl text-red-600 font-bold underline"
-        >
-          Play a fucking sound (Real fucking sound)
-        </button>
-      </div>
-    </div>
-    <div class="flex justify-center mt-20">
-      <div class="grid grid-cols-3 grid-rows-1 gap-8 bg-white row-span-2">
-        <div
-          class="border-yellow-200 border-4 mr-4 p-4 bg-transparent text-3xl text-red-600 font-bold underline"
-        >
-          Avatar 1
-        </div>
-        <div
-          class="border-yellow-200 border-4 mx-4 p-4 bg-transparent text-3xl text-red-600 font-bold underline"
-        >
-          Avatar 2
-        </div>
-        <button
-          class="border-yellow-200 border-4 ml-4 p-4 bg-transparent text-3xl text-red-600 font-bold underline"
-        >
-          Avatar 3
-        </button>
-      </div>
     </div>
   </div>
 </template>
@@ -71,12 +69,33 @@ export default {
   props: {
     gamestate: Number,
   },
-  data() {},
+  data() {
+    return {
+      allcharec: useAllcha(),
+      infobot: useCounterStore(),
+
+      infotop: topPlayer(),
+    };
+  },
   methods: {
     play() {
-      console.log(this.gamestate);
+      var pos = -1;
+      var begin = 0;
+      this.allcharec.active.forEach((element) => {
+        if (element === true) {
+          pos = begin;
+        }
+        begin++;
+      });
+      if (pos === -1) {
+        return;
+      }
+      this.infobot.platerava = pos;
       this.$emit("update", 1);
-      console.log(this.gamestate);
+    },
+    setActivela(pos) {
+      this.allcharec.active.fill(false);
+      this.allcharec.active[pos] = true;
     },
   },
 };

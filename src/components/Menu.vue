@@ -53,16 +53,21 @@ export default {
       var sound = new Audio("/src/assets/sound/crazylaugh.mp3");
       var sound1 = new Audio("/src/assets/sound/crazylaugh.mp3");
       var sound2 = new Audio("/src/assets/sound/crazylaugh.mp3");
+      var sound3 = new Audio("/src/assets/sound/crazylaugh.mp3");
       sound.loop = true;
       sound1.loop = true;
       sound2.loop = true;
+      sound3.loop = true;
       sound.play();
       setTimeout(() => {
         sound1.play();
-      }, 200);
+      }, 300);
       setTimeout(() => {
         sound2.play();
-      }, 400);
+      }, 600);
+      setTimeout(() => {
+        sound3.play();
+      }, 900);
     },
   },
 };
