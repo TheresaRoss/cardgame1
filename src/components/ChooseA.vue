@@ -94,6 +94,8 @@ export default {
       this.$emit("update", 1);
     },
     setActivela(pos) {
+      var sound = new Audio(this.allcharec.voice[pos]);
+      sound.play();
       this.allcharec.active.fill(false);
       this.allcharec.active[pos] = true;
     },

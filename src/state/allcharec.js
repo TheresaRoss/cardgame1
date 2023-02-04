@@ -7,6 +7,8 @@ export const useAllcha = defineStore({
     state: () => ({
         cardname: ['1', '2', '3', '4', '5'],
        active:[false,false,false,false,false],
+       voice:["/src/assets/sound/tenebia.mp3","/src/assets/sound/tomoca.mp3","/src/assets/sound/siseria.mp3","/src/assets/sound/bwitchiseria.mp3","/src/assets/sound/tamarin.mp3"]
+       ,
         picture: ["/src/assets/picture/maincha/coolone.jpg", "/src/assets/picture/maincha/nahida.jpg",
          "/src/assets/picture/maincha/onbeach.jpg", "/src/assets/picture/maincha/smellflo.jpg", "/src/assets/picture/maincha/vtube.jpg"]
 
