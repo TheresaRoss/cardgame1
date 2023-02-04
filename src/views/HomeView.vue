@@ -951,17 +951,26 @@ export default defineComponent({
       }"
     >
       <!-- topplayer hp bar -->
-      <div class="flex absolute items-center mt-5 w-[15%] top-0 left-[25%]">
+      <div class="absolute items-center mt-5 w-[15%] top-[3%] left-0">
+        <!-- top plater avatar   -->
+        <div class="z-10 flex justify-center">
+          <img
+            class="object-cover h-[7rem] w-[7rem] rounded-full"
+            :src="infobot.platerava"
+            alt="cuteto"
+          />
+        </div>
+        <!-- this is a top player attack place-->
         <div
           v-bind:class="{
             visible: this.canatktopplayer && this.gamestate === 1,
             invisible: !this.canatktopplayer,
           }"
           v-on:click="attackTopplayer"
-          class="w-8 h-8 bg-white mr-5"
+          class="ml-3 w-8 h-8 bg-white mr-5"
         ></div>
-        <!-- this is a top player attack place-->
-        <div class="w-full bg-white rounded-full h-2.5">
+        <!-- hp bar -->
+        <div class="ml-3 w-full bg-white rounded-full h-2.5">
           <div
             class="bg-red-600 h-2.5 rounded-full"
             v-bind:style="{ width: hpPer }"
@@ -971,17 +980,24 @@ export default defineComponent({
       </div>
 
       <!-- botplayer hp bar -->
-      <div class="flex absolute items-center w-[15%] bottom-0 right-[25%]">
+      <div class="absolute items-center w-[15%] mt-5 top-[72%] left-0">
+        <div class="z-10 flex justify-center">
+          <img
+            class="object-fit w-[7rem] rounded-full"
+            src="/src/assets/picture/maincha/coolone.jpg"
+            alt="cuteto"
+          />
+        </div>
         <div
           v-bind:class="{
             visible: this.canatkbotplayer && this.gamestate === 1,
             invisible: !this.canatkbotplayer,
           }"
           v-on:click="attackBotplayer"
-          class="w-8 h-8 bg-white mr-5"
+          class="ml-3 w-8 h-8 bg-white mr-5"
         ></div>
         <!-- this is a bot player attack place-->
-        <div class="w-full bg-white rounded-full h-2.5">
+        <div class="ml-3 w-full bg-white rounded-full h-2.5">
           <div
             class="bg-red-600 h-2.5 rounded-full"
             v-bind:style="{ width: hpPer2 }"
@@ -1192,7 +1208,7 @@ export default defineComponent({
           visible: this.onhovercard,
           invisible: !this.onhovercard,
         }"
-        class="bg-indigo-900 absolute ml-4 p-2 top-[50%] border-solid border-white border-2"
+        class="bg-indigo-900 absolute ml-4 p-2 top-[40%] border-solid border-white border-2"
       >
         <div class="bg-transparent">
           <div class="bg-inherit">Name: {{ statedes.cardname }}</div>
@@ -1204,12 +1220,12 @@ export default defineComponent({
       </div>
 
       <!-- money label for top -->
-      <div class="absolute left-0 top-[25%]">
+      <div class="absolute left-0 top-[30%]">
         <div class="text-2xl">MONEY FOR TOP LA: {{ infotop.money }}</div>
       </div>
 
       <!-- Money label for bot -->
-      <div class="absolute left-0 top-[75%]">
+      <div class="absolute left-0 top-[67%]">
         <div class="text-2xl">MONEY FOR TOP LA: {{ infobot.money }}</div>
       </div>
 
@@ -1264,14 +1280,16 @@ export default defineComponent({
       <!-- turn number and whose turn -->
       <div
         v-bind:class="{
-          'absolute mr-5 top top-[50%] right-0 border-x-[40px] rotate-180 border-x-transparent border-b-[40px] border-b-blue-600':
+          'absolute mr-5 top top-[55%] right-0 border-x-[40px] rotate-180 border-x-transparent border-b-[40px] border-b-blue-600':
             !gamemech.whoseTurn,
-          'absolute mr-5 top top-[50%] right-0 border-x-[40px]  border-x-transparent border-b-[40px] border-b-blue-600':
+          'absolute mr-5 top top-[55%] right-0 border-x-[40px]  border-x-transparent border-b-[40px] border-b-blue-600':
             gamemech.whoseTurn,
         }"
       ></div>
-      <div>Turn Count: {{ gamemech.turnCount }}</div>
-      <div>Whose Turn: {{ gamemech.whoseTurn }}</div>
+      <div class="absolute mr-3 top-[40%] right-0">
+        <div>Turn Count: {{ gamemech.turnCount }}</div>
+        <div>Whose Turn: {{ gamemech.whoseTurn }}</div>
+      </div>
     </div>
     <!-- Gameover Component -->
     <div
