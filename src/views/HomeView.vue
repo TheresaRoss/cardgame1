@@ -11,6 +11,7 @@ import { gameMech } from "../state/gamemech";
 import Menu from "../components/Menu.vue";
 import Gameover from "../components/Gameover.vue";
 import ChooseA from "../components/ChooseA.vue";
+import ChooseA2 from "../components/ChooseA2.vue";
 
 import Cardbase2 from "../components/Cardbase2.vue";
 </script>
@@ -28,7 +29,7 @@ export default defineComponent({
   },
   data() {
     return {
-      gamestate: 0, //0 = main menu -1 = choosing avatar 1 = gameplay 2 = gameover
+      gamestate: 0, //0 = main menu -1 = choosing avatar -2 = choosing avatar for bot 1 = gameplay 2 = gameover
       currentComponent: null,
       currentComponent2: null,
       currentComponent3: null,
@@ -932,7 +933,7 @@ export default defineComponent({
     >
       <Menu v-bind:gamestate="gamestate" v-on:update="gamestate = -1" />
     </div>
-    <!-- Choosing Avatar Menu -->
+    <!-- Choosing Avatar Menu for top -->
     <div
       class="absolute top-0 inset-x-0"
       v-bind:class="{
@@ -940,7 +941,18 @@ export default defineComponent({
         invisible: this.gamestate !== -1,
       }"
     >
-      <ChooseA v-bind:gamestate="gamestate" v-on:update="gamestate = 1" />
+      <ChooseA v-bind:gamestate="gamestate" v-on:update="gamestate = -2" />
+    </div>
+
+    <!-- Choosing Avatar Menu for bot -->
+    <div
+      class="absolute top-0 inset-x-0"
+      v-bind:class="{
+        visible: this.gamestate === -2,
+        invisible: this.gamestate !== -2,
+      }"
+    >
+      <ChooseA2 v-bind:gamestate="gamestate" v-on:update="gamestate = 1" />
     </div>
 
     <!-- Game component -->
@@ -956,7 +968,7 @@ export default defineComponent({
         <div class="z-10 flex justify-center">
           <img
             class="object-cover h-[7rem] w-[7rem] rounded-full"
-            :src="infobot.platerava"
+            :src="infotop.playerava"
             alt="cuteto"
           />
         </div>
@@ -983,8 +995,8 @@ export default defineComponent({
       <div class="absolute items-center w-[15%] mt-5 top-[72%] left-0">
         <div class="z-10 flex justify-center">
           <img
-            class="object-fit w-[7rem] rounded-full"
-            src="/src/assets/picture/maincha/coolone.jpg"
+            class="object-cover h-[7rem] w-[7rem] rounded-full"
+            :src="infobot.playerava"
             alt="cuteto"
           />
         </div>

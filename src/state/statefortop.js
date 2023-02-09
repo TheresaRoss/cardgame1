@@ -5,6 +5,7 @@ export const topPlayer = defineStore({
   id:'topPlayer',
   //init state
   state: ()=>({
+    playerava: "",
     playerhp:200,
     //first 0-4 index is for card on hand, 5-9 will be active card
     cardname:['1','2','3','4','5'],

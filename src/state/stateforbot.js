@@ -5,7 +5,7 @@ export const useCounterStore = defineStore({
   id:'infobot',
   //init state
   state: ()=>({
-    platerava: "",
+    playerava: "",
     playerhp: 2,
     //first 0-4 index is for card on hand, 5-9 will be active card
     cardname:['1','2','3','4','5'],

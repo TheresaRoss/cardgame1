@@ -12,7 +12,7 @@ import { topPlayer } from "../state/statefortop";
       <div
         class="bg-sky-200 p-4 mt-4 border-white border-4 flex justify-center text-3xl text-red-600 font-bold underline"
       >
-        CHOOSING YOUR AVATAR
+        CHOOSING YOUR AVATAR 2
       </div>
     </div>
     <div class="flex justify-center">
@@ -117,8 +117,8 @@ export default {
       if (pos === -1) {
         return;
       }
-      this.infobot.playerava = this.allcharec.picture[pos];
-      this.$emit("update", -2); //change state to set avatar for bot
+      this.infotop.playerava = this.allcharec.picture[pos];
+      this.$emit("update", 1); //change state to set avatar for bot
     },
     setActivela(pos) {
       var sound = new Audio(this.allcharec.voice[pos]);
