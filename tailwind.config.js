@@ -22,5 +22,8 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('postcss-import'),
+    require('postcss-apply')
+  ],
 }

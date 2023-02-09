@@ -12,7 +12,7 @@ import { topPlayer } from "../state/statefortop";
       <div
         class="bg-sky-200 p-4 mt-4 border-white border-4 flex justify-center text-3xl text-red-600 font-bold underline"
       >
-        CHOOSING YOUR AVATAR
+        CHOOSING YOUR AVATAR (TOP PLAYER)
       </div>
     </div>
     <div class="flex justify-center">
