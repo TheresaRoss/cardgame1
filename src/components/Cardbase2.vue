@@ -29,12 +29,25 @@
           </p>
         </div>
       </div>
+
+      <!-- Place for buff in card -->
+      <div class="bg-transparent absolute top-[20%] left-[5%]">
+        <Atkup />
+      </div>
+
+      <!-- Place for debuff in card -->
+      <div class="bg-transparent absolute top-[20%] right-[5%]">
+        <Atkdown class="mb-2" />
+        <Atkdown />
+      </div>
     </div>
   </div>
 </template>
 <script setup>
 import { useCounterStore } from "../state/stateforbot";
 import { topPlayer } from "../state/statefortop";
+import Atkup from "./buff/Atkup.vue";
+import Atkdown from "./debuff/Atkdown.vue";
 const infotop = topPlayer();
 </script>
 <script>

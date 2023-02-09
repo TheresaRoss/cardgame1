@@ -8,16 +8,21 @@ export const useCounterStore = defineStore({
     playerava: "",
     playerhp: 2,
     //first 0-4 index is for card on hand, 5-9 will be active card
-    cardname:['1','2','3','4','5'],
+    cardname:['','','','','','','','','',''],
     cardatk: ['10','20','30','40','50'],
     cardhp:['100','200','300','400','500'],
-    cardpassive:[false,false,true,false,true],
+    cardpassive: ['','','','',''], 
     cardrare:['N','N','R','R','SR'],
     picture: ["", "", "", "", ""],
+    carddes: ['','','','','','','','','',''],
     cardcost: [0,0,0,0,0],
     abletoatk: [0,0,0,0,0],
     active: [false,false,false,false,false,false,false,false,false,false,false,false],
     money:200,
+    //should be map, each buff map with duration
+    buff:[new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),],
+    
+    debuff:[new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),]
     
 
 

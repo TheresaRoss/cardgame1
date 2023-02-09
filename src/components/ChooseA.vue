@@ -117,7 +117,7 @@ export default {
       if (pos === -1) {
         return;
       }
-      this.infobot.playerava = this.allcharec.picture[pos];
+      this.infotop.playerava = this.allcharec.picture[pos];
       this.$emit("update", -2); //change state to set avatar for bot
     },
     setActivela(pos) {

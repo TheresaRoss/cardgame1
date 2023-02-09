@@ -13,6 +13,7 @@
       >
         {{ infobot.cardcost[pos] }}
       </div>
+
       <div class="flex justify-center bg-white">
         <h1 class="text-black text-xl bg-white">{{ infobot.cardname[pos] }}</h1>
       </div>
@@ -29,11 +30,31 @@
           </p>
         </div>
       </div>
+
+      <!-- Place for buff in card -->
+      <div class="bg-transparent absolute top-[20%] left-[5%]">
+        <Atkup
+          v-bind:class="{
+            //on Active style invisible:
+            invisible: !infobot.buff[pos].get('atk'),
+            visible: infobot.buff[pos].get('atk'),
+          }"
+          v-bind:duration="infobot.buff[pos].get('atk')"
+        />
+      </div>
+
+      <!-- Place for debuff in card -->
+      <div class="bg-transparent absolute top-[20%] right-[5%]">
+        <Atkdown class="mb-2" />
+        <Atkdown />
+      </div>
     </div>
   </div>
 </template>
 <script setup>
 import { useCounterStore } from "../state/stateforbot";
+import Atkup from "./buff/Atkup.vue";
+import Atkdown from "./debuff/Atkdown.vue";
 const infobot = useCounterStore();
 </script>
 <script>

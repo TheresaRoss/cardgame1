@@ -29,7 +29,7 @@ export default defineComponent({
   },
   data() {
     return {
-      gamestate: 0, //0 = main menu -1 = choosing avatar -2 = choosing avatar for bot 1 = gameplay 2 = gameover
+      gamestate: 1, //0 = main menu -1 = choosing avatar -2 = choosing avatar for bot 1 = gameplay 2 = gameover
       currentComponent: null,
       currentComponent2: null,
       currentComponent3: null,
@@ -190,6 +190,7 @@ export default defineComponent({
       this.topOnhand5 = Cardbase2;
     },
 
+    //draw bot
     createNewComponent() {
       const sound = new Audio("/src/assets/sound/wargoddaimubai.mp3");
       sound.volume = 0.7;
@@ -225,7 +226,8 @@ export default defineComponent({
       this.infobot.cardpassive[0] = this.allcard.cardpassive[realinfo];
       this.infobot.picture[0] = this.allcard.picture[realinfo];
       this.infobot.cardcost[0] = this.allcard.cardcost[realinfo];
-
+      this.infobot.carddes[0] = this.allcard.carddes[realinfo];
+      this.infobot.cardpassive[0] = this.allcard.cardpassive[realinfo];
       this.currentComponent = Cardbase;
     },
     createNewComponent2() {
@@ -247,7 +249,8 @@ export default defineComponent({
       this.infobot.cardpassive[1] = this.allcard.cardpassive[realinfo];
       this.infobot.picture[1] = this.allcard.picture[realinfo];
       this.infobot.cardcost[1] = this.allcard.cardcost[realinfo];
-
+      this.infobot.carddes[1] = this.allcard.carddes[realinfo];
+      this.infobot.cardpassive[1] = this.allcard.cardpassive[realinfo];
       this.currentComponent2 = Cardbase;
     },
     createNewComponent3() {
@@ -270,6 +273,8 @@ export default defineComponent({
       this.infobot.cardpassive[2] = this.allcard.cardpassive[realinfo];
       this.infobot.picture[2] = this.allcard.picture[realinfo];
       this.infobot.cardcost[2] = this.allcard.cardcost[realinfo];
+      this.infobot.carddes[2] = this.allcard.carddes[realinfo];
+      this.infobot.cardpassive[2] = this.allcard.cardpassive[realinfo];
 
       this.currentComponent3 = Cardbase;
     },
@@ -292,6 +297,8 @@ export default defineComponent({
       this.infobot.cardpassive[3] = this.allcard.cardpassive[realinfo];
       this.infobot.picture[3] = this.allcard.picture[realinfo];
       this.infobot.cardcost[3] = this.allcard.cardcost[realinfo];
+      this.infobot.carddes[3] = this.allcard.carddes[realinfo];
+      this.infobot.cardpassive[3] = this.allcard.cardpassive[realinfo];
 
       this.currentComponent4 = Cardbase;
     },
@@ -309,11 +316,14 @@ export default defineComponent({
       this.infobot.cardpassive[4] = this.allcard.cardpassive[realinfo];
       this.infobot.picture[4] = this.allcard.picture[realinfo];
       this.infobot.cardcost[4] = this.allcard.cardcost[realinfo];
+      this.infobot.carddes[4] = this.allcard.carddes[realinfo];
+      this.infobot.cardpassive[4] = this.allcard.cardpassive[realinfo];
 
       this.currentComponent5 = Cardbase;
     },
 
-    animateElement(pos) {
+    //bot play card
+    useCardbot(pos) {
       console.log(pos);
       const posq = parseInt(pos);
       const sound = new Audio("/src/assets/sound/youdumb.mp3");
@@ -328,9 +338,28 @@ export default defineComponent({
         return;
       }
 
+      //check passive and activate if On deploy
+
+      var activeP = false;
+      var detailP = this.infobot.cardpassive[posq].split(" ");
+      if (detailP[0] === "OD") {
+        //On deploy
+        //console.log("find");
+        activeP = true;
+      } else {
+      }
+
       sound.play(); //play sound when valid
 
       this.infobot.money -= this.infobot.cardcost[posq];
+
+      //can do at anyplace, since it
+      if (activeP) {
+        if (detailP[2] === "AA") {
+          //effect on all ally
+          this.onDeploybuffbot(detailP);
+        }
+      }
 
       if (this.activeCard1) {
         if (this.activeCard2) {
@@ -343,6 +372,8 @@ export default defineComponent({
               this.infobot.cardpassive[9] = this.infobot.cardpassive[posq];
               this.infobot.picture[9] = this.infobot.picture[posq];
               this.infobot.cardcost[9] = this.infobot.cardcost[posq];
+              this.infobot.carddes[9] = this.infobot.carddes[posq];
+              this.infobot.cardpassive[9] = this.infobot.cardpassive[posq];
               this.infobot.abletoatk[9] = 0;
               switch (posq) {
                 case 0:
@@ -364,6 +395,8 @@ export default defineComponent({
                   break;
               }
 
+              //have on deploy effect
+
               this.activeCard5 = Cardbase;
               return;
             }
@@ -374,6 +407,8 @@ export default defineComponent({
             this.infobot.cardpassive[8] = this.infobot.cardpassive[posq];
             this.infobot.picture[8] = this.infobot.picture[posq];
             this.infobot.cardcost[8] = this.infobot.cardcost[posq];
+            this.infobot.carddes[8] = this.infobot.carddes[posq];
+            this.infobot.cardpassive[8] = this.infobot.cardpassive[posq];
             this.infobot.abletoatk[8] = 0;
             switch (posq) {
               case 0:
@@ -405,6 +440,8 @@ export default defineComponent({
           this.infobot.cardpassive[7] = this.infobot.cardpassive[posq];
           this.infobot.picture[7] = this.infobot.picture[posq];
           this.infobot.cardcost[7] = this.infobot.cardcost[posq];
+          this.infobot.carddes[7] = this.infobot.carddes[posq];
+          this.infobot.cardpassive[7] = this.infobot.cardpassive[posq];
           this.infobot.abletoatk[7] = 0;
 
           switch (posq) {
@@ -437,6 +474,8 @@ export default defineComponent({
         this.infobot.cardpassive[6] = this.infobot.cardpassive[posq];
         this.infobot.picture[6] = this.infobot.picture[posq];
         this.infobot.cardcost[6] = this.infobot.cardcost[posq];
+        this.infobot.carddes[6] = this.infobot.carddes[posq];
+        this.infobot.cardpassive[6] = this.infobot.cardpassive[posq];
         this.infobot.abletoatk[6] = 0;
 
         switch (posq) {
@@ -469,6 +508,9 @@ export default defineComponent({
       this.infobot.cardpassive[5] = this.infobot.cardpassive[posq];
       this.infobot.picture[5] = this.infobot.picture[posq];
       this.infobot.cardcost[5] = this.infobot.cardcost[posq];
+      this.infobot.carddes[5] = this.infobot.carddes[posq];
+      this.infobot.cardpassive[5] = this.infobot.cardpassive[posq];
+
       this.infobot.abletoatk[5] = 0;
       switch (posq) {
         case 0:
@@ -492,6 +534,25 @@ export default defineComponent({
 
       this.activeCard1 = Cardbase;
       return;
+    },
+
+    onDeploybuffbot(data) {
+      //can do at anyplace, since it
+      //effect on all ally (except the caster)
+      if (data[3] === "Atk") {
+        for (let i = 5; i < 10; i++) {
+          if (this.infobot.cardname[i] !== "")
+            if (!this.infobot.buff[i]["atk"]) {
+              //prevent from buff nonexistent card
+              // in case this card already have a buff
+              this.infobot.buff[i].set("atk", parseInt(data[4]));
+            } else {
+              if (this.infobot.buff[i]["atk"] < 2) {
+                this.infobot.buff[i].set("atk", parseInt(data[4]));
+              }
+            }
+        }
+      }
     },
 
     useCardtop(pos) {
@@ -677,6 +738,7 @@ export default defineComponent({
 
     //onClicktoAttack
     botOnclickcard(pos) {
+      console.log(this.botplayerclickStatus);
       if (!this.gamemech.whoseTurn) {
         if (this.infobot.abletoatk[pos] === 0) {
           return;
@@ -699,7 +761,9 @@ export default defineComponent({
             this.canatktopplayer = true;
           }
         } else if (this.botplayerclickStatus === 1) {
+          this.infobot.active[this.activebotCardpos] = false;
           this.activebotCardpos = pos;
+          this.infobot.active[pos] = true;
         }
       }
     },
@@ -775,7 +839,9 @@ export default defineComponent({
 
           this.infotop.active[pos] = true;
         } else if (this.topplayerclickStatus === 1) {
+          this.infotop.active[this.activetopCardpos] = false;
           this.activetopCardpos = pos;
+          this.infotop.active[pos] = true;
         }
       }
     },
@@ -881,7 +947,6 @@ export default defineComponent({
       }
     },
     topEndturn() {
-      //console.log(this.infobot.$state);
       this.topplayerclickStatus = 0;
       this.infotop.abletoatk.fill(1); //reset atk status
       this.infobot.money += 10;
@@ -890,11 +955,23 @@ export default defineComponent({
       this.gamemech.increaseTurn();
     },
     botEndturn() {
+      console.log(this.infobot.$state);
       this.botplayerclickStatus = 0;
       this.infobot.abletoatk.fill(1);
       this.canatktopplayer = false; //reset atk top player
       this.infotop.money += 10; //add money
       this.infobot.active.fill(false);
+
+      //decrease buff duration
+      for (let i = 5; i < 10; i++) {
+        for (let [key, value] of this.infobot.buff[i]) {
+          this.infobot.buff[i].set(key, value - 1);
+          if (value === 0) {
+            this.infobot.buff[i].delete(key);
+          }
+        }
+      }
+
       this.gamemech.increaseTurn();
     },
     onmouseEnterdes(pos) {
@@ -905,7 +982,9 @@ export default defineComponent({
       this.statedes.cardcost = this.infobot.cardcost[pos];
       this.statedes.cardhp = this.infobot.cardhp[pos];
       this.statedes.cardremainatk = this.infobot.abletoatk[pos];
+      this.statedes.description = this.infobot.carddes[pos];
     },
+    //for top
     onmouseEnterTdes(pos) {
       this.onhovercard = true;
       // console.log(this.statedes.cardname);
@@ -1122,35 +1201,35 @@ export default defineComponent({
       >
         <div class="flex justify-center">
           <component
-            v-on:click="animateElement(0)"
+            v-on:click="useCardbot(0)"
             v-on:mouseenter="onmouseEnterdes(0)"
             v-on:mouseleave="onmouseLeavedes(0)"
             pos="0"
             :is="currentComponent"
           />
           <component
-            v-on:click="animateElement(1)"
+            v-on:click="useCardbot(1)"
             v-on:mouseenter="onmouseEnterdes(1)"
             v-on:mouseleave="onmouseLeavedes(1)"
             pos="1"
             :is="currentComponent2"
           />
           <component
-            v-on:click="animateElement(2)"
+            v-on:click="useCardbot(2)"
             v-on:mouseenter="onmouseEnterdes(2)"
             v-on:mouseleave="onmouseLeavedes(2)"
             pos="2"
             :is="currentComponent3"
           />
           <component
-            v-on:click="animateElement(3)"
+            v-on:click="useCardbot(3)"
             v-on:mouseenter="onmouseEnterdes(3)"
             v-on:mouseleave="onmouseLeavedes(3)"
             pos="3"
             :is="currentComponent4"
           />
           <component
-            v-on:click="animateElement(4)"
+            v-on:click="useCardbot(4)"
             v-on:mouseenter="onmouseEnterdes(4)"
             v-on:mouseleave="onmouseLeavedes(4)"
             pos="4"
@@ -1220,7 +1299,7 @@ export default defineComponent({
           visible: this.onhovercard,
           invisible: !this.onhovercard,
         }"
-        class="bg-indigo-900 absolute ml-4 p-2 top-[40%] border-solid border-white border-2"
+        class="bg-indigo-900 absolute w-[15%] ml-4 text-xs p-2 top-[40%] border-solid border-white border-2"
       >
         <div class="bg-transparent">
           <div class="bg-inherit">Name: {{ statedes.cardname }}</div>
@@ -1228,6 +1307,7 @@ export default defineComponent({
           <div class="bg-inherit">Hp: {{ statedes.cardhp }}</div>
           <div class="bg-inherit">Atk: {{ statedes.cardatk }}</div>
           <div class="bg-inherit">Remain Atk: {{ statedes.cardremainatk }}</div>
+          <div class="bg-inherit">Description: {{ statedes.description }}</div>
         </div>
       </div>
 
