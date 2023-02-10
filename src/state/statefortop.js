@@ -7,17 +7,25 @@ export const topPlayer = defineStore({
   state: ()=>({
     playerava: "",
     playerhp:200,
+    cardname:['','','','','','','','','',''],
     //first 0-4 index is for card on hand, 5-9 will be active card
-    cardname:['1','2','3','4','5'],
+   
     cardatk: ['10','20','30','40','50'],
     cardhp:['100','200','300','400','500'],
+    carddes: ['','','','','','','','','',''],
     cardpassive:[false,false,true,false,true],
     cardrare:['N','N','R','R','SR'],
     picture: ["", "", "", "", ""],
     cardcost: [0,0,0,0,0],
     abletoatk: [0,0,0,0,0], //atk count per turn
     active: [false,false,false,false,false,false,false,false,false,false,false,false],
-      money: 55
+      money: 255,
+        //should be map, each buff map with duration
+    buff:[new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),],
+    
+    debuff:[new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),]
+    
+
     
 
 

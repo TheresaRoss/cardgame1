@@ -29,10 +29,16 @@
           </p>
         </div>
       </div>
-
       <!-- Place for buff in card -->
       <div class="bg-transparent absolute top-[20%] left-[5%]">
-        <Atkup />
+        <Atkup
+          v-bind:class="{
+            //on Active style invisible:
+            invisible: !infotop.buff[pos].get('atk'),
+            visible: infotop.buff[pos].get('atk'),
+          }"
+          v-bind:duration="infotop.buff[pos].get('atk')"
+        />
       </div>
 
       <!-- Place for debuff in card -->

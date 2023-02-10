@@ -107,6 +107,8 @@ export default defineComponent({
       this.infotop.cardpassive[0] = this.allcard.cardpassive[realinfo];
       this.infotop.picture[0] = this.allcard.picture[realinfo];
       this.infotop.cardcost[0] = this.allcard.cardcost[realinfo];
+      this.infotop.carddes[0] = this.allcard.carddes[realinfo];
+      this.infotop.cardpassive[0] = this.allcard.cardpassive[realinfo];
 
       this.topOnhand1 = Cardbase2;
     },
@@ -128,6 +130,8 @@ export default defineComponent({
       this.infotop.cardpassive[1] = this.allcard.cardpassive[realinfo];
       this.infotop.picture[1] = this.allcard.picture[realinfo];
       this.infotop.cardcost[1] = this.allcard.cardcost[realinfo];
+      this.infotop.carddes[1] = this.allcard.carddes[realinfo];
+      this.infotop.cardpassive[1] = this.allcard.cardpassive[realinfo];
 
       this.topOnhand2 = Cardbase2;
     },
@@ -149,6 +153,8 @@ export default defineComponent({
       this.infotop.cardpassive[2] = this.allcard.cardpassive[realinfo];
       this.infotop.picture[2] = this.allcard.picture[realinfo];
       this.infotop.cardcost[2] = this.allcard.cardcost[realinfo];
+      this.infotop.carddes[2] = this.allcard.carddes[realinfo];
+      this.infotop.cardpassive[2] = this.allcard.cardpassive[realinfo];
 
       this.topOnhand3 = Cardbase2;
     },
@@ -170,6 +176,8 @@ export default defineComponent({
       this.infotop.cardpassive[3] = this.allcard.cardpassive[realinfo];
       this.infotop.picture[3] = this.allcard.picture[realinfo];
       this.infotop.cardcost[3] = this.allcard.cardcost[realinfo];
+      this.infotop.carddes[3] = this.allcard.carddes[realinfo];
+      this.infotop.cardpassive[3] = this.allcard.cardpassive[realinfo];
 
       this.topOnhand4 = Cardbase2;
     },
@@ -186,6 +194,8 @@ export default defineComponent({
       this.infotop.cardpassive[4] = this.allcard.cardpassive[realinfo];
       this.infotop.picture[4] = this.allcard.picture[realinfo];
       this.infotop.cardcost[4] = this.allcard.cardcost[realinfo];
+      this.infotop.carddes[4] = this.allcard.carddes[realinfo];
+      this.infotop.cardpassive[4] = this.allcard.cardpassive[realinfo];
 
       this.topOnhand5 = Cardbase2;
     },
@@ -571,6 +581,23 @@ export default defineComponent({
       }
       this.infotop.money -= this.infotop.cardcost[posq];
 
+      var activeP = false;
+      var detailP = this.infotop.cardpassive[posq].split(" ");
+      if (detailP[0] === "OD") {
+        //On deploy
+        //console.log("find");
+        activeP = true;
+      } else {
+      }
+
+      if (activeP) {
+        if (detailP[2] === "AA") {
+          //effect on all ally
+
+          this.onDeploybufftop(detailP);
+        }
+      }
+
       sound.play(); //play sound only when it valid
 
       if (this.activetopCard1) {
@@ -584,6 +611,8 @@ export default defineComponent({
               this.infotop.cardpassive[9] = this.infotop.cardpassive[posq];
               this.infotop.picture[9] = this.infotop.picture[posq];
               this.infotop.cardcost[9] = this.infotop.cardcost[posq];
+              this.infotop.carddes[9] = this.infotop.carddes[posq];
+              this.infotop.cardpassive[9] = this.infotop.cardpassive[posq];
               this.infotop.abletoatk[9] = 0;
               switch (posq) {
                 case 0:
@@ -615,6 +644,8 @@ export default defineComponent({
             this.infotop.cardpassive[8] = this.infotop.cardpassive[posq];
             this.infotop.picture[8] = this.infotop.picture[posq];
             this.infotop.cardcost[8] = this.infotop.cardcost[posq];
+            this.infotop.carddes[8] = this.infotop.carddes[posq];
+            this.infotop.cardpassive[8] = this.infotop.cardpassive[posq];
             this.infotop.abletoatk[8] = 0;
             switch (posq) {
               case 0:
@@ -646,6 +677,8 @@ export default defineComponent({
           this.infotop.cardpassive[7] = this.infotop.cardpassive[posq];
           this.infotop.picture[7] = this.infotop.picture[posq];
           this.infotop.cardcost[7] = this.infotop.cardcost[posq];
+          this.infotop.carddes[7] = this.infotop.carddes[posq];
+          this.infotop.cardpassive[7] = this.infotop.cardpassive[posq];
           this.infotop.abletoatk[7] = 0;
           switch (posq) {
             case 0:
@@ -677,6 +710,8 @@ export default defineComponent({
         this.infotop.cardpassive[6] = this.infotop.cardpassive[posq];
         this.infotop.picture[6] = this.infotop.picture[posq];
         this.infotop.cardcost[6] = this.infotop.cardcost[posq];
+        this.infotop.carddes[6] = this.infotop.carddes[posq];
+        this.infotop.cardpassive[6] = this.infotop.cardpassive[posq];
         this.infotop.abletoatk[6] = 0;
         switch (posq) {
           case 0:
@@ -708,6 +743,8 @@ export default defineComponent({
       this.infotop.cardpassive[5] = this.infotop.cardpassive[posq];
       this.infotop.picture[5] = this.infotop.picture[posq];
       this.infotop.cardcost[5] = this.infotop.cardcost[posq];
+      this.infotop.carddes[5] = this.infotop.carddes[posq];
+      this.infotop.cardpassive[5] = this.infotop.cardpassive[posq];
       this.infotop.abletoatk[5] = 0;
 
       //dont know how to concen string to varieble, using eval will result
@@ -734,6 +771,24 @@ export default defineComponent({
 
       this.activetopCard1 = Cardbase2;
       return;
+    },
+    onDeploybufftop(data) {
+      //can do at anyplace, since it
+      //effect on all ally (except the caster)
+      if (data[3] === "Atk") {
+        for (let i = 5; i < 10; i++) {
+          if (this.infotop.cardname[i] !== "")
+            if (!this.infotop.buff[i]["atk"]) {
+              //prevent from buff nonexistent card
+              // in case this card already have a buff
+              this.infotop.buff[i].set("atk", parseInt(data[4]));
+            } else {
+              if (this.infotop.buff[i]["atk"] < 2) {
+                this.infotop.buff[i].set("atk", parseInt(data[4]));
+              }
+            }
+        }
+      }
     },
 
     //onClicktoAttack
@@ -949,13 +1004,24 @@ export default defineComponent({
     topEndturn() {
       this.topplayerclickStatus = 0;
       this.infotop.abletoatk.fill(1); //reset atk status
+      this.canatkbotplayer = false; //reset atk bot player
       this.infobot.money += 10;
       this.infotop.active.fill(false);
+
+      //decrease buff duration
+      for (let i = 5; i < 10; i++) {
+        for (let [key, value] of this.infotop.buff[i]) {
+          this.infotop.buff[i].set(key, value - 1);
+          if (value === 0) {
+            this.infotop.buff[i].delete(key);
+          }
+        }
+      }
 
       this.gamemech.increaseTurn();
     },
     botEndturn() {
-      console.log(this.infobot.$state);
+      console.log(this.infotop.$state);
       this.botplayerclickStatus = 0;
       this.infobot.abletoatk.fill(1);
       this.canatktopplayer = false; //reset atk top player
