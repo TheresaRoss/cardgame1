@@ -9,7 +9,8 @@ export const topPlayer = defineStore({
     playerhp:200,
     cardname:['','','','','','','','','',''],
     //first 0-4 index is for card on hand, 5-9 will be active card
-   
+    //save base attack
+    
     cardatk: ['10','20','30','40','50'],
     cardhp:['100','200','300','400','500'],
     carddes: ['','','','','','','','','',''],
@@ -40,6 +41,11 @@ export const topPlayer = defineStore({
     testman() {
       this.count = this.count*3
       
+    },
+    increaseAttack(pos){
+      let a = parseInt(this.cardatk[pos])
+      a= Math.floor(a*1.5)
+      this.cardatk[pos] = a.toString()
     }
   },
   //getters can return, while actions can't
