@@ -1055,6 +1055,7 @@ export default defineComponent({
 
       this.gamemech.increaseTurn();
     },
+    //for bot
     onmouseEnterdes(pos) {
       this.onhovercard = true;
       // console.log(this.statedes.cardname);
@@ -1074,6 +1075,7 @@ export default defineComponent({
       this.statedes.cardcost = this.infotop.cardcost[pos];
       this.statedes.cardhp = this.infotop.cardhp[pos];
       this.statedes.cardremainatk = this.infotop.abletoatk[pos];
+      this.statedes.description = this.infotop.carddes[pos];
     },
     onmouseLeavedes(pos) {
       this.onhovercard = false;
