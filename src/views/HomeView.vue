@@ -558,6 +558,7 @@ export default defineComponent({
               //prevent from buff nonexistent card
               // in case this card already have a buff
               this.infobot.buff[i].set("atk", parseInt(data[4]));
+
               this.infobot.increaseAttack(i);
             } else {
               if (this.infobot.buff[i]["atk"] < 2) {
@@ -1143,6 +1144,8 @@ export default defineComponent({
       this.statedes.cardhp = this.infobot.cardhp[pos];
       this.statedes.cardremainatk = this.infobot.abletoatk[pos];
       this.statedes.description = this.infobot.carddes[pos];
+      this.statedes.buff = this.infobot.buff[pos];
+      this.statedes.debuff = this.infobot.debuff[pos];
     },
     //for top
     onmouseEnterTdes(pos) {
@@ -1154,6 +1157,8 @@ export default defineComponent({
       this.statedes.cardhp = this.infotop.cardhp[pos];
       this.statedes.cardremainatk = this.infotop.abletoatk[pos];
       this.statedes.description = this.infotop.carddes[pos];
+      this.statedes.buff = this.infotop.buff[pos];
+      this.statedes.debuff = this.infotop.debuff[pos];
     },
     onmouseLeavedes(pos) {
       this.onhovercard = false;
@@ -1469,6 +1474,15 @@ export default defineComponent({
           <div class="bg-inherit">Atk: {{ statedes.cardatk }}</div>
           <div class="bg-inherit">Remain Atk: {{ statedes.cardremainatk }}</div>
           <div class="bg-inherit">Description: {{ statedes.description }}</div>
+          <div class="bg-inherit">
+            <div
+              class="bg-inherit"
+              v-for="(value, key) in statedes.buff"
+              :key="key"
+            >
+              {{ key }}: {{ value }}
+            </div>
+          </div>
         </div>
       </div>
 

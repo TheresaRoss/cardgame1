@@ -10,7 +10,10 @@ export const stateDes = defineStore({
     cardcost:'0',
     cardhp: '0',
     cardremainatk: '0',
-    description: ''
+    description: '',
+    buff:[new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),],
+    debuff:[new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),new Map(),]
+    
 
 
 
