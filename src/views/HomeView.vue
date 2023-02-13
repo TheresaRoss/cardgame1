@@ -1071,6 +1071,23 @@ export default defineComponent({
         }
       }
 
+      //decrease debuff duration
+      for (let i = 5; i < 10; i++) {
+        for (let [key, value] of this.infotop.debuff[i]) {
+          this.infotop.debuff[i].set(key, value - 1);
+
+          if (value === 1) {
+            if (key === "atk") {
+              //reverse effect
+              this.infotop.cardatk[i] = Math.ceil(
+                (parseInt(this.infotop.cardatk[i]) * 10) / 7
+              );
+              this.infotop.debuff[i].delete(key);
+            }
+          }
+        }
+      }
+
       this.gamemech.increaseTurn();
     },
     botEndturn() {
@@ -1092,6 +1109,23 @@ export default defineComponent({
                 (parseInt(this.infobot.cardatk[i]) * 2) / 3
               );
               this.infobot.buff[i].delete(key);
+            }
+          }
+        }
+      }
+
+      //decrease debuff duration
+      for (let i = 5; i < 10; i++) {
+        for (let [key, value] of this.infobot.debuff[i]) {
+          this.infobot.debuff[i].set(key, value - 1);
+
+          if (value === 1) {
+            if (key === "atk") {
+              //reverse effect
+              this.infobot.cardatk[i] = Math.ceil(
+                (parseInt(this.infobot.cardatk[i]) * 10) / 7
+              );
+              this.infobot.debuff[i].delete(key);
             }
           }
         }

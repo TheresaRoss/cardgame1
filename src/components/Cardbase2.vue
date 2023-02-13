@@ -43,8 +43,15 @@
 
       <!-- Place for debuff in card -->
       <div class="bg-transparent absolute top-[20%] right-[5%]">
-        <Atkdown class="mb-2" />
-        <Atkdown />
+        <Atkdown
+          class="mb-2"
+          v-bind:class="{
+            //on Active style invisible:
+            invisible: !infotop.debuff[pos].get('atk'),
+            visible: infotop.debuff[pos].get('atk'),
+          }"
+          v-bind:duration="infotop.debuff[pos].get('atk')"
+        />
       </div>
     </div>
   </div>
