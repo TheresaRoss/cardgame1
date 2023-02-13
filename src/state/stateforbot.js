@@ -37,6 +37,11 @@ export const useCounterStore = defineStore({
     testman() {
       this.count = this.count*3
       
+    },
+    increaseAttack(pos){
+      let a = parseInt(this.cardatk[pos])
+      a= Math.floor(a*1.5)
+      this.cardatk[pos] = a.toString()
     }
   },
   //getters can return, while actions can't

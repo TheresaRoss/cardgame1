@@ -556,6 +556,7 @@ export default defineComponent({
               //prevent from buff nonexistent card
               // in case this card already have a buff
               this.infobot.buff[i].set("atk", parseInt(data[4]));
+              this.infobot.increaseAttack(i);
             } else {
               if (this.infobot.buff[i]["atk"] < 2) {
                 this.infobot.buff[i].set("atk", parseInt(data[4]));
@@ -1016,7 +1017,7 @@ export default defineComponent({
 
           if (value === 1) {
             if (key === "atk") {
-              console.log("What");
+              //reverse effect
               this.infotop.cardatk[i] = Math.ceil(
                 (parseInt(this.infotop.cardatk[i]) * 2) / 3
               );
@@ -1040,8 +1041,14 @@ export default defineComponent({
       for (let i = 5; i < 10; i++) {
         for (let [key, value] of this.infobot.buff[i]) {
           this.infobot.buff[i].set(key, value - 1);
-          if (value === 0) {
-            this.infobot.buff[i].delete(key);
+
+          if (value === 1) {
+            if (key === "atk") {
+              this.infobot.cardatk[i] = Math.ceil(
+                (parseInt(this.infobot.cardatk[i]) * 2) / 3
+              );
+              this.infobot.buff[i].delete(key);
+            }
           }
         }
       }
