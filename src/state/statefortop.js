@@ -46,7 +46,15 @@ export const topPlayer = defineStore({
       let a = parseInt(this.cardatk[pos])
       a= Math.floor(a*1.5)
       this.cardatk[pos] = a.toString()
+    },
+    //Bot will call this function and it will have effect on Top
+    decreaseAttack(pos){
+      let a = parseInt(this.cardatk[pos])
+      a= Math.floor(a*0.7) //decrease by 30%
+      this.cardatk[pos] = a.toString()
+
     }
+
   },
   //getters can return, while actions can't
   getters:{

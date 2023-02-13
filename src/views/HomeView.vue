@@ -368,6 +368,8 @@ export default defineComponent({
         if (detailP[2] === "AA") {
           //effect on all ally
           this.onDeploybuffbot(detailP);
+        } else if (detailP[2] === "AE") {
+          this.onDeploydebuffbot(detailP);
         }
       }
 
@@ -565,6 +567,26 @@ export default defineComponent({
         }
       }
     },
+    //bot call top affected
+    onDeploydebuffbot(data) {
+      //can do at anyplace, since it
+      //effect on all ally (except the caster)
+      if (data[3] === "Atk") {
+        for (let i = 5; i < 10; i++) {
+          if (this.infotop.cardname[i] !== "")
+            if (!this.infotop.debuff[i]["atk"]) {
+              //prevent from buff nonexistent card
+              // in case this card already have a buff
+              this.infotop.debuff[i].set("atk", parseInt(data[4]));
+              this.infotop.decreaseAttack(i);
+            } else {
+              if (this.infotop.debuff[i]["atk"] < 2) {
+                this.infotop.debuff[i].set("atk", parseInt(data[4]));
+              }
+            }
+        }
+      }
+    },
 
     useCardtop(pos) {
       console.log(pos);
@@ -596,6 +618,8 @@ export default defineComponent({
           //effect on all ally
 
           this.onDeploybufftop(detailP);
+        } else if (detailP[2] === "AE") {
+          this.onDeploydebufftop(detailP);
         }
       }
 
@@ -787,6 +811,26 @@ export default defineComponent({
             } else {
               if (this.infotop.buff[i]["atk"] < 2) {
                 this.infotop.buff[i].set("atk", parseInt(data[4]));
+              }
+            }
+        }
+      }
+    },
+    //Top deploy bot got debuff
+    onDeploydebufftop(data) {
+      //can do at anyplace, since it
+      //effect on all ally (except the caster)
+      if (data[3] === "Atk") {
+        for (let i = 5; i < 10; i++) {
+          if (this.infobot.cardname[i] !== "")
+            if (!this.infobot.debuff[i]["atk"]) {
+              //prevent from buff nonexistent card
+              // in case this card already have a buff
+              this.infobot.debuff[i].set("atk", parseInt(data[4]));
+              this.infobot.decreaseAttack(i);
+            } else {
+              if (this.infobot.debuff[i]["atk"] < 2) {
+                this.infobot.debuff[i].set("atk", parseInt(data[4]));
               }
             }
         }
