@@ -36,10 +36,10 @@
         <Atkup
           v-bind:class="{
             //on Active style invisible:
-            invisible: !infobot.buff[pos].get('atk'),
-            visible: infobot.buff[pos].get('atk'),
+            invisible: !infobot.buff[pos].get('Increaseatk'),
+            visible: infobot.buff[pos].get('Increaseatk'),
           }"
-          v-bind:duration="infobot.buff[pos].get('atk')"
+          v-bind:duration="infobot.buff[pos].get('Increaseatk')"
         />
       </div>
 
@@ -49,10 +49,10 @@
           class="mb-2"
           v-bind:class="{
             //on Active style invisible:
-            invisible: !infobot.debuff[pos].get('atk'),
-            visible: infobot.debuff[pos].get('atk'),
+            invisible: !infobot.debuff[pos].get('Decreaseatk'),
+            visible: infobot.debuff[pos].get('Decreaseatk'),
           }"
-          v-bind:duration="infobot.debuff[pos].get('atk')"
+          v-bind:duration="infobot.debuff[pos].get('Decreaseatk')"
         />
       </div>
     </div>

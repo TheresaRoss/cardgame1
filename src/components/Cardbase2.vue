@@ -29,15 +29,14 @@
           </p>
         </div>
       </div>
-      <!-- Place for buff in card -->
       <div class="bg-transparent absolute top-[20%] left-[5%]">
         <Atkup
           v-bind:class="{
             //on Active style invisible:
-            invisible: !infotop.buff[pos].get('atk'),
-            visible: infotop.buff[pos].get('atk'),
+            invisible: !infotop.buff[pos].get('Increaseatk'),
+            visible: infotop.buff[pos].get('Increaseatk'),
           }"
-          v-bind:duration="infotop.buff[pos].get('atk')"
+          v-bind:duration="infotop.buff[pos].get('Increaseatk')"
         />
       </div>
 
@@ -47,10 +46,10 @@
           class="mb-2"
           v-bind:class="{
             //on Active style invisible:
-            invisible: !infotop.debuff[pos].get('atk'),
-            visible: infotop.debuff[pos].get('atk'),
+            invisible: !infotop.debuff[pos].get('Decreaseatk'),
+            visible: infotop.debuff[pos].get('Decreaseatk'),
           }"
-          v-bind:duration="infotop.debuff[pos].get('atk')"
+          v-bind:duration="infotop.debuff[pos].get('Decreaseatk')"
         />
       </div>
     </div>

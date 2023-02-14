@@ -554,15 +554,15 @@ export default defineComponent({
       if (data[3] === "Atk") {
         for (let i = 5; i < 10; i++) {
           if (this.infobot.cardname[i] !== "")
-            if (!this.infobot.buff[i]["atk"]) {
+            if (!this.infobot.buff[i]["Increaseatk"]) {
               //prevent from buff nonexistent card
               // in case this card already have a buff
-              this.infobot.buff[i].set("atk", parseInt(data[4]));
+              this.infobot.buff[i].set("Increaseatk", parseInt(data[4]));
 
               this.infobot.increaseAttack(i);
             } else {
-              if (this.infobot.buff[i]["atk"] < 2) {
-                this.infobot.buff[i].set("atk", parseInt(data[4]));
+              if (this.infobot.buff[i]["Increaseatk"] < 2) {
+                this.infobot.buff[i].set("Increaseatk", parseInt(data[4]));
               }
             }
         }
@@ -575,14 +575,14 @@ export default defineComponent({
       if (data[3] === "Atk") {
         for (let i = 5; i < 10; i++) {
           if (this.infotop.cardname[i] !== "")
-            if (!this.infotop.debuff[i]["atk"]) {
+            if (!this.infotop.debuff[i]["Decreaseatk"]) {
               //prevent from buff nonexistent card
               // in case this card already have a buff
-              this.infotop.debuff[i].set("atk", parseInt(data[4]));
+              this.infotop.debuff[i].set("Decreaseatk", parseInt(data[4]));
               this.infotop.decreaseAttack(i);
             } else {
-              if (this.infotop.debuff[i]["atk"] < 2) {
-                this.infotop.debuff[i].set("atk", parseInt(data[4]));
+              if (this.infotop.debuff[i]["Decreaseatk"] < 2) {
+                this.infotop.debuff[i].set("Decreaseatk", parseInt(data[4]));
               }
             }
         }
@@ -804,14 +804,14 @@ export default defineComponent({
       if (data[3] === "Atk") {
         for (let i = 5; i < 10; i++) {
           if (this.infotop.cardname[i] !== "")
-            if (!this.infotop.buff[i]["atk"]) {
+            if (!this.infotop.buff[i]["Increaseatk"]) {
               //prevent from buff nonexistent card
               // in case this card already have a buff
-              this.infotop.buff[i].set("atk", parseInt(data[4]));
+              this.infotop.buff[i].set("Increaseatk", parseInt(data[4]));
               this.infotop.increaseAttack(i);
             } else {
-              if (this.infotop.buff[i]["atk"] < 2) {
-                this.infotop.buff[i].set("atk", parseInt(data[4]));
+              if (this.infotop.buff[i]["Increaseatk"] < 2) {
+                this.infotop.buff[i].set("Increaseatk", parseInt(data[4]));
               }
             }
         }
@@ -824,14 +824,14 @@ export default defineComponent({
       if (data[3] === "Atk") {
         for (let i = 5; i < 10; i++) {
           if (this.infobot.cardname[i] !== "")
-            if (!this.infobot.debuff[i]["atk"]) {
+            if (!this.infobot.debuff[i]["Decreaseatk"]) {
               //prevent from buff nonexistent card
               // in case this card already have a buff
-              this.infobot.debuff[i].set("atk", parseInt(data[4]));
+              this.infobot.debuff[i].set("Decreaseatk", parseInt(data[4]));
               this.infobot.decreaseAttack(i);
             } else {
-              if (this.infobot.debuff[i]["atk"] < 2) {
-                this.infobot.debuff[i].set("atk", parseInt(data[4]));
+              if (this.infobot.debuff[i]["Decreaseatk"] < 2) {
+                this.infobot.debuff[i].set("Decreaseatk", parseInt(data[4]));
               }
             }
         }
@@ -877,7 +877,7 @@ export default defineComponent({
         const sound1 = new Audio("/src/assets/sound/nopunch.mp3");
 
         sound1.play();
-        this.infobot.abletoatk[this.activebotCardpos] -= 1; //reduce atk time 1
+        this.infobot.abletoatk[this.activebotCardpos] -= 1; //reduce Increaseatk time 1
         //calculate and update dmg
         this.infotop.cardhp[pos] -= this.infobot.cardatk[this.activebotCardpos];
         //console.log("attacked!");
@@ -955,7 +955,7 @@ export default defineComponent({
 
         sound1.play();
         //calculate and update dmg
-        this.infotop.abletoatk[this.activetopCardpos] -= 1; //reduce atk time 1
+        this.infotop.abletoatk[this.activetopCardpos] -= 1; //reduce Increaseatk time 1
         this.infobot.cardhp[pos] -= this.infotop.cardatk[this.activetopCardpos];
         //console.log("attacked!");
 
@@ -1004,7 +1004,7 @@ export default defineComponent({
 
         sound2.play();
         //calculate and update dmg
-        this.infobot.abletoatk[this.activebotCardpos] -= 1; //reduce atk time 1
+        this.infobot.abletoatk[this.activebotCardpos] -= 1; //reduce Increaseatk time 1
         this.infotop.playerhp -= this.infobot.cardatk[this.activebotCardpos];
         if (this.infotop.playerhp <= 0) {
           this.gamestate = 2;
@@ -1031,7 +1031,7 @@ export default defineComponent({
 
         sound2.play();
         //calculate and update dmg
-        this.infotop.abletoatk[this.activetopCardpos] -= 1; //reduce atk time 1
+        this.infotop.abletoatk[this.activetopCardpos] -= 1; //reduce Increaseatk time 1
         this.infobot.playerhp -= this.infotop.cardatk[this.activetopCardpos];
         if (this.infobot.playerhp <= 0) {
           this.gamestate = 2;
@@ -1050,8 +1050,8 @@ export default defineComponent({
     },
     topEndturn() {
       this.topplayerclickStatus = 0;
-      this.infotop.abletoatk.fill(1); //reset atk status
-      this.canatkbotplayer = false; //reset atk bot player
+      this.infotop.abletoatk.fill(1); //reset Increaseatk status
+      this.canatkbotplayer = false; //reset Increaseatk bot player
       this.infobot.money += 10;
       this.infotop.active.fill(false);
 
@@ -1061,7 +1061,7 @@ export default defineComponent({
           this.infotop.buff[i].set(key, value - 1);
 
           if (value === 1) {
-            if (key === "atk") {
+            if (key === "Increaseatk") {
               //reverse effect
               this.infotop.cardatk[i] = Math.ceil(
                 (parseInt(this.infotop.cardatk[i]) * 2) / 3
@@ -1078,7 +1078,7 @@ export default defineComponent({
           this.infotop.debuff[i].set(key, value - 1);
 
           if (value === 1) {
-            if (key === "atk") {
+            if (key === "Decreaseatk") {
               //reverse effect
               this.infotop.cardatk[i] = Math.ceil(
                 (parseInt(this.infotop.cardatk[i]) * 10) / 7
@@ -1095,7 +1095,7 @@ export default defineComponent({
       console.log(this.infotop.$state);
       this.botplayerclickStatus = 0;
       this.infobot.abletoatk.fill(1);
-      this.canatktopplayer = false; //reset atk top player
+      this.canatktopplayer = false; //reset Increaseatk top player
       this.infotop.money += 10; //add money
       this.infobot.active.fill(false);
 
@@ -1105,7 +1105,7 @@ export default defineComponent({
           this.infobot.buff[i].set(key, value - 1);
 
           if (value === 1) {
-            if (key === "atk") {
+            if (key === "Increaseatk") {
               this.infobot.cardatk[i] = Math.ceil(
                 (parseInt(this.infobot.cardatk[i]) * 2) / 3
               );
@@ -1121,7 +1121,7 @@ export default defineComponent({
           this.infobot.debuff[i].set(key, value - 1);
 
           if (value === 1) {
-            if (key === "atk") {
+            if (key === "Decreaseatk") {
               //reverse effect
               this.infobot.cardatk[i] = Math.ceil(
                 (parseInt(this.infobot.cardatk[i]) * 10) / 7
@@ -1465,7 +1465,7 @@ export default defineComponent({
           visible: this.onhovercard,
           invisible: !this.onhovercard,
         }"
-        class="bg-indigo-900 absolute w-[15%] ml-4 text-xs p-2 top-[40%] border-solid border-white border-2"
+        class="bg-indigo-900 absolute w-[25%] ml-4 text-xs p-2 top-[40%] border-solid border-white border-2"
       >
         <div class="bg-transparent">
           <div class="bg-inherit">Name: {{ statedes.cardname }}</div>
@@ -1474,13 +1474,21 @@ export default defineComponent({
           <div class="bg-inherit">Atk: {{ statedes.cardatk }}</div>
           <div class="bg-inherit">Remain Atk: {{ statedes.cardremainatk }}</div>
           <div class="bg-inherit">Description: {{ statedes.description }}</div>
-          <div class="bg-inherit">
-            <div
-              class="bg-inherit"
-              v-for="(value, key) in statedes.buff"
-              :key="key"
-            >
-              {{ key }}: {{ value }}
+
+          <hr class="h-px my-2 bg-white border-0" />
+          <div class="bg-inherit grid grid-cols-2">
+            <div class="bg-inherit border-r border-white">
+              <div class="bg-inherit flex justify-center">Buff</div>
+              <div class="bg-inherit" v-for="[key, value] in statedes.buff">
+                {{ key }} : {{ value }}
+              </div>
+            </div>
+
+            <div class="bg-inherit border-l pl-2 border-white">
+              <div class="bg-inherit flex justify-center">Debuff</div>
+              <div class="bg-inherit" v-for="[key, value] in statedes.debuff">
+                {{ key }} : {{ value }}
+              </div>
             </div>
           </div>
         </div>
