@@ -549,11 +549,14 @@ export default defineComponent({
     },
 
     onDeploybuffbot(data) {
+      var sound1 = new Audio("/src/assets/sound/buff/buff.mp3");
+      sound1.play();
       //can do at anyplace, since it
       //effect on all ally (except the caster)
-      if (data[3] === "Atk") {
-        for (let i = 5; i < 10; i++) {
-          if (this.infobot.cardname[i] !== "")
+
+      for (let i = 5; i < 10; i++) {
+        if (this.infobot.cardname[i] !== "") {
+          if (data[3] === "Atk") {
             if (!this.infobot.buff[i]["Increaseatk"]) {
               //prevent from buff nonexistent card
               // in case this card already have a buff
@@ -565,6 +568,17 @@ export default defineComponent({
                 this.infobot.buff[i].set("Increaseatk", parseInt(data[4]));
               }
             }
+          } else if (data[3] === "Pa") {
+            if (!this.infobot.buff[i]["Positiveattitude"]) {
+              //prevent from buff nonexistent card
+              // in case this card already have a buff
+              this.infobot.buff[i].set("Positiveattitude", parseInt(data[4]));
+            } else {
+              if (this.infobot.buff[i]["Positiveattitude"] < 3) {
+                this.infobot.buff[i].set("Positiveattitude", parseInt(data[4]));
+              }
+            }
+          }
         }
       }
     },
@@ -799,11 +813,14 @@ export default defineComponent({
       return;
     },
     onDeploybufftop(data) {
+      var sound1 = new Audio("/src/assets/sound/buff/buff.mp3");
+      sound1.play();
       //can do at anyplace, since it
       //effect on all ally (except the caster)
-      if (data[3] === "Atk") {
-        for (let i = 5; i < 10; i++) {
-          if (this.infotop.cardname[i] !== "")
+
+      for (let i = 5; i < 10; i++) {
+        if (this.infotop.cardname[i] !== "") {
+          if (data[3] === "Atk") {
             if (!this.infotop.buff[i]["Increaseatk"]) {
               //prevent from buff nonexistent card
               // in case this card already have a buff
@@ -814,6 +831,17 @@ export default defineComponent({
                 this.infotop.buff[i].set("Increaseatk", parseInt(data[4]));
               }
             }
+          } else if (data[3] === "Pa") {
+            if (!this.infotop.buff[i]["Positiveattitude"]) {
+              //prevent from buff nonexistent card
+              // in case this card already have a buff
+              this.infotop.buff[i].set("Positiveattitude", parseInt(data[4]));
+            } else {
+              if (this.infotop.buff[i]["Positiveattitude"] < 3) {
+                this.infotop.buff[i].set("Positiveattitude", parseInt(data[4]));
+              }
+            }
+          }
         }
       }
     },
@@ -1067,6 +1095,8 @@ export default defineComponent({
                 (parseInt(this.infotop.cardatk[i]) * 2) / 3
               );
               this.infotop.buff[i].delete(key);
+            } else if (key === "Positiveattitude") {
+              this.infotop.buff[i].delete(key);
             }
           }
         }
@@ -1111,6 +1141,10 @@ export default defineComponent({
               );
               this.infobot.buff[i].delete(key);
             }
+          }
+
+          if (key === "Positiveattitude") {
+            this.infobot.buff[i].delete(key);
           }
         }
       }

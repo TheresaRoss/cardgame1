@@ -12,12 +12,15 @@ export const useAllcard = defineStore({
         //1 will be time when it will activate
         //2 will be effect (P = positive,N = negative)
         //3 will be effect on (AA = all ally AE = all enemy)
-        //4 will be buff name (Atk = attack up)
+        //4 will be buff name (Atk = attack up, Pa = positive attitude)
         //5 will be duration
-        cardpassive: ['OD P AA Atk 2','OD N AE Atk 2','','',''],
+        cardpassive: ['OD P AA Atk 2',
+        'OD N AE Atk 2',
+        'OD P AA Pa 3','',''],
         cardrare: ['N', 'N', 'R', 'R', 'SR'],
-        carddes: ['On deploy, grant all ally in field except the caster atk buff for 2 turns',
-        'On deploy, decrease atk on all enemy card that is on field','','','','','','','',''],
+        carddes: ['On deploy, grant all ally in field except the caster Attack buff for 2 turns',
+        'On deploy, Decrease atk on all enemy card that is on field',
+        'On deploy, bring a Positive attitude to their allies','','','','','','',''],
         cardcost: [10,5,8,15,20],
         picture: ["/src/assets/picture/partyman1.jpg", "/src/assets/picture/hothead.jpg",
          "/src/assets/picture/catandguitar.jpg", "/src/assets/picture/hothead.jpg", "/src/assets/picture/hothead.jpg"]

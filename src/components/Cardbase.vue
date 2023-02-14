@@ -15,7 +15,7 @@
       </div>
 
       <div class="flex justify-center bg-white">
-        <h1 class="text-black text-xl bg-white">{{ infobot.cardname[pos] }}</h1>
+        <h1 class="text-black text-lg bg-white">{{ infobot.cardname[pos] }}</h1>
       </div>
       <img class="w-[6rem]" :src="infobot.picture[pos]" />
       <div class="flex relative pt-1 bg-white">
@@ -41,6 +41,14 @@
           }"
           v-bind:duration="infobot.buff[pos].get('Increaseatk')"
         />
+        <Positiveat
+          v-bind:class="{
+            //on Active style invisible:
+            invisible: !infobot.buff[pos].get('Positiveattitude'),
+            visible: infobot.buff[pos].get('Positiveattitude'),
+          }"
+          v-bind:duration="infobot.buff[pos].get('Positiveattitude')"
+        />
       </div>
 
       <!-- Place for debuff in card -->
@@ -62,6 +70,7 @@
 import { useCounterStore } from "../state/stateforbot";
 import Atkup from "./buff/Atkup.vue";
 import Atkdown from "./debuff/Atkdown.vue";
+import Positiveat from "./buff/Positiveat.vue";
 const infobot = useCounterStore();
 </script>
 <script>
