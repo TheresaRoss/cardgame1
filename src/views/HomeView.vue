@@ -386,6 +386,7 @@ export default defineComponent({
               this.infobot.cardcost[9] = this.infobot.cardcost[posq];
               this.infobot.carddes[9] = this.infobot.carddes[posq];
               this.infobot.cardpassive[9] = this.infobot.cardpassive[posq];
+              this.infobot.cardbaseatk[9] = this.infobot.cardatk[posq];
               this.infobot.abletoatk[9] = 0;
               switch (posq) {
                 case 0:
@@ -421,6 +422,7 @@ export default defineComponent({
             this.infobot.cardcost[8] = this.infobot.cardcost[posq];
             this.infobot.carddes[8] = this.infobot.carddes[posq];
             this.infobot.cardpassive[8] = this.infobot.cardpassive[posq];
+            this.infobot.cardbaseatk[8] = this.infobot.cardatk[posq];
             this.infobot.abletoatk[8] = 0;
             switch (posq) {
               case 0:
@@ -454,6 +456,7 @@ export default defineComponent({
           this.infobot.cardcost[7] = this.infobot.cardcost[posq];
           this.infobot.carddes[7] = this.infobot.carddes[posq];
           this.infobot.cardpassive[7] = this.infobot.cardpassive[posq];
+          this.infobot.cardbaseatk[7] = this.infobot.cardatk[posq];
           this.infobot.abletoatk[7] = 0;
 
           switch (posq) {
@@ -488,6 +491,7 @@ export default defineComponent({
         this.infobot.cardcost[6] = this.infobot.cardcost[posq];
         this.infobot.carddes[6] = this.infobot.carddes[posq];
         this.infobot.cardpassive[6] = this.infobot.cardpassive[posq];
+        this.infobot.cardbaseatk[6] = this.infobot.cardatk[posq];
         this.infobot.abletoatk[6] = 0;
 
         switch (posq) {
@@ -522,6 +526,7 @@ export default defineComponent({
       this.infobot.cardcost[5] = this.infobot.cardcost[posq];
       this.infobot.carddes[5] = this.infobot.carddes[posq];
       this.infobot.cardpassive[5] = this.infobot.cardpassive[posq];
+      this.infobot.cardbaseatk[5] = this.infobot.cardatk[posq];
 
       this.infobot.abletoatk[5] = 0;
       switch (posq) {
@@ -655,6 +660,7 @@ export default defineComponent({
               this.infotop.cardcost[9] = this.infotop.cardcost[posq];
               this.infotop.carddes[9] = this.infotop.carddes[posq];
               this.infotop.cardpassive[9] = this.infotop.cardpassive[posq];
+              this.infotop.cardbaseatk[9] = this.infotop.cardatk[posq];
               this.infotop.abletoatk[9] = 0;
               switch (posq) {
                 case 0:
@@ -688,6 +694,7 @@ export default defineComponent({
             this.infotop.cardcost[8] = this.infotop.cardcost[posq];
             this.infotop.carddes[8] = this.infotop.carddes[posq];
             this.infotop.cardpassive[8] = this.infotop.cardpassive[posq];
+            this.infotop.cardbaseatk[8] = this.infotop.cardatk[posq];
             this.infotop.abletoatk[8] = 0;
             switch (posq) {
               case 0:
@@ -721,6 +728,7 @@ export default defineComponent({
           this.infotop.cardcost[7] = this.infotop.cardcost[posq];
           this.infotop.carddes[7] = this.infotop.carddes[posq];
           this.infotop.cardpassive[7] = this.infotop.cardpassive[posq];
+          this.infotop.cardbaseatk[7] = this.infotop.cardatk[posq];
           this.infotop.abletoatk[7] = 0;
           switch (posq) {
             case 0:
@@ -754,6 +762,7 @@ export default defineComponent({
         this.infotop.cardcost[6] = this.infotop.cardcost[posq];
         this.infotop.carddes[6] = this.infotop.carddes[posq];
         this.infotop.cardpassive[6] = this.infotop.cardpassive[posq];
+        this.infotop.cardbaseatk[6] = this.infotop.cardatk[posq];
         this.infotop.abletoatk[6] = 0;
         switch (posq) {
           case 0:
@@ -787,6 +796,7 @@ export default defineComponent({
       this.infotop.cardcost[5] = this.infotop.cardcost[posq];
       this.infotop.carddes[5] = this.infotop.carddes[posq];
       this.infotop.cardpassive[5] = this.infotop.cardpassive[posq];
+      this.infotop.cardbaseatk[5] = this.infotop.cardatk[posq];
       this.infotop.abletoatk[5] = 0;
 
       //dont know how to concen string to varieble, using eval will result
@@ -1083,7 +1093,7 @@ export default defineComponent({
       this.topplayerclickStatus = 0;
       this.infotop.abletoatk.fill(1); //reset Increaseatk status
       this.canatkbotplayer = false; //reset Increaseatk bot player
-      this.infobot.money += 10;
+      this.infobot.increaseMoney();
       this.infotop.active.fill(false);
 
       //decrease buff duration
@@ -1129,7 +1139,7 @@ export default defineComponent({
       this.botplayerclickStatus = 0;
       this.infobot.abletoatk.fill(1);
       this.canatktopplayer = false; //reset Increaseatk top player
-      this.infotop.money += 10; //add money
+      this.infotop.increaseMoney(); //add money
       this.infobot.active.fill(false);
 
       //decrease buff duration
@@ -1143,12 +1153,12 @@ export default defineComponent({
 
               this.infobot.buff[i].delete(key);
             }
-          }
 
-          if (key === "Positiveattitude") {
-            this.infobot.dispelPositiveAt(i);
+            if (key === "Positiveattitude") {
+              this.infobot.dispelPositiveAt(i);
 
-            this.infobot.buff[i].delete(key);
+              this.infobot.buff[i].delete(key);
+            }
           }
         }
       }

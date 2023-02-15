@@ -53,4 +53,4 @@ export const useAllcard = defineStore({
 //increase atk ( +atk 50% )
 //positive attitude (+atk 20% +income 30%)
 //Debuff List
-//decrease atk (-atk 30%)
+//decrease atk (-atk 40%)

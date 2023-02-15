@@ -10,6 +10,7 @@ export const useCounterStore = defineStore({
     //first 0-4 index is for card on hand, 5-9 will be active card
     cardname:['','','','','','','','','',''],
     cardatk: ['10','20','30','40','50'],
+    cardbaseatk:['','','','','','','','','','',],
     cardhp:['100','200','300','400','500'],
     cardpassive: ['','','','',''], 
     cardrare:['N','N','R','R','SR'],
@@ -31,6 +32,22 @@ export const useCounterStore = defineStore({
   }),
   //easy function
   actions:{
+    increaseMoney(){
+      let basemoney = 10
+      for (let i = 5; i < 10; i++) {
+        for (let [key, value] of this.buff[i]) {
+          if(key === "Positiveattitude"){
+            
+            basemoney+= (basemoney*0.3)
+            this.money+=basemoney
+            return;
+          }
+        }
+      }
+
+
+      
+    },
     increaseCount() {
       this.count++
     },
@@ -39,37 +56,38 @@ export const useCounterStore = defineStore({
       
     },
     increaseAttack(pos){
-      let a = parseInt(this.cardatk[pos])
-      a= Math.floor(a*1.5)
-      this.cardatk[pos] = a.toString()
+      let a = parseInt(this.cardbaseatk[pos])
+      a= Math.floor(a*0.5)
+      this.cardatk[pos]+= a
     },
     positiveAttitude(pos){
-      let a = parseInt(this.cardatk[pos])
-      a= Math.floor(a*1.2)
-      this.cardatk[pos] = a.toString()
+      let a = parseInt(this.cardbaseatk[pos])
+      a= Math.floor(a*0.2)
+      this.cardatk[pos]+= a
     },
-    //top call 
+    //Bot will call this function and it will have effect on Top
     decreaseAttack(pos){
-      let a = parseInt(this.cardatk[pos])
-      a= Math.floor(a*0.7) //decrease by 30%
-      this.cardatk[pos] = a.toString()
+      let a = parseInt(this.cardbaseatk[pos])
+      a= Math.floor(a*0.4) //decrease by 40%
+      this.cardatk[pos] -= a
 
     },
+
 
     //dispel effect
     dispelIncreaseAtk(pos){
-      this.cardatk[pos] = Math.ceil(
-        (parseInt(this.cardatk[pos]) * 2) / 3
-      );
+          this.cardatk[pos] -= Math.ceil(
+            (parseInt(this.cardbaseatk[pos]) * 0.5 )
+          );
     },
     dispelPositiveAt(pos){
-      this.cardatk[pos] = Math.ceil(
-        (parseInt(this.cardatk[pos]) * 5) / 6
-      );
+          this.cardatk[pos] -= Math.ceil(
+            (parseInt(this.cardbaseatk[pos]) * 0.2)
+          );
     },
     dispelDecreaseAtk(pos){
-      this.cardatk[pos] = Math.ceil(
-        (parseInt(this.cardatk[pos]) * 10) / 7
+      this.cardatk[pos] += Math.ceil(
+        (parseInt(this.cardbaseatk[pos]) * 0.4)
       );
     }
   },
