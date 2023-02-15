@@ -41,8 +41,8 @@ export default defineComponent({
       activeCard4: null,
       activeCard5: null,
       winner: "",
-      allnumber: [0, 1, 2, 3, 4],
-      numDeckTop: [0, 1, 2, 3, 4],
+      allcardbot: [0, 1, 2, 3, 4, 5],
+      numDeckTop: [0, 1, 2, 3, 4, 5],
       infobot: useCounterStore(),
       allcard: useAllcard(),
       infotop: topPlayer(),
@@ -98,7 +98,7 @@ export default defineComponent({
       //remove that number from deck
       const realinfo = this.numDeckTop[rand];
       this.numDeckTop.splice(rand, 1);
-      //console.log('num: ',this.allnumber)
+      //console.log('num: ',this.allcardbot)
 
       //assign data
       this.infotop.cardname[0] = this.allcard.cardname[realinfo];
@@ -222,12 +222,12 @@ export default defineComponent({
         return;
       }
       //random card from deck
-      const rand = Math.floor(Math.random() * this.allnumber.length);
+      const rand = Math.floor(Math.random() * this.allcardbot.length);
       //console.log('random num: ', rand)
       //remove that number from deck
-      const realinfo = this.allnumber[rand];
-      this.allnumber.splice(rand, 1);
-      //console.log('num: ',this.allnumber)
+      const realinfo = this.allcardbot[rand];
+      this.allcardbot.splice(rand, 1);
+      //console.log('num: ',this.allcardbot)
 
       //assign data
       this.infobot.cardname[0] = this.allcard.cardname[realinfo];
@@ -246,12 +246,12 @@ export default defineComponent({
         return;
       }
 
-      const rand = Math.floor(Math.random() * this.allnumber.length);
-      const realinfo = this.allnumber[rand];
+      const rand = Math.floor(Math.random() * this.allcardbot.length);
+      const realinfo = this.allcardbot[rand];
 
-      this.allnumber.splice(rand, 1);
+      this.allcardbot.splice(rand, 1);
       //console.log('random num: ', rand)
-      //console.log('num: ',this.allnumber)
+      //console.log('num: ',this.allcardbot)
 
       this.infobot.cardname[1] = this.allcard.cardname[realinfo];
       this.infobot.cardatk[1] = this.allcard.cardatk[realinfo];
@@ -264,18 +264,18 @@ export default defineComponent({
       this.currentComponent2 = Cardbase;
     },
     createNewComponent3() {
-      //console.log(this.allnumber, ' ddddddddddddddd')
+      //console.log(this.allcardbot, ' ddddddddddddddd')
       if (this.currentComponent3) {
         this.createNewComponent4();
         return;
       }
 
-      const rand = Math.floor(Math.random() * this.allnumber.length);
-      const realinfo = this.allnumber[rand];
+      const rand = Math.floor(Math.random() * this.allcardbot.length);
+      const realinfo = this.allcardbot[rand];
 
-      this.allnumber.splice(rand, 1);
+      this.allcardbot.splice(rand, 1);
       //console.log('random num: ', rand)
-      //console.log('num: ',this.allnumber)
+      //console.log('num: ',this.allcardbot)
 
       this.infobot.cardatk[2] = this.allcard.cardatk[realinfo];
       this.infobot.cardname[2] = this.allcard.cardname[realinfo];
@@ -294,12 +294,12 @@ export default defineComponent({
         return;
       }
 
-      const rand = Math.floor(Math.random() * this.allnumber.length);
-      const realinfo = this.allnumber[rand];
+      const rand = Math.floor(Math.random() * this.allcardbot.length);
+      const realinfo = this.allcardbot[rand];
 
-      this.allnumber.splice(rand, 1);
+      this.allcardbot.splice(rand, 1);
       //console.log('random num: ', rand)
-      //console.log('num: ',this.allnumber)
+      //console.log('num: ',this.allcardbot)
 
       this.infobot.cardatk[3] = this.allcard.cardatk[realinfo];
       this.infobot.cardname[3] = this.allcard.cardname[realinfo];
@@ -313,12 +313,12 @@ export default defineComponent({
       this.currentComponent4 = Cardbase;
     },
     createNewComponent5() {
-      const rand = Math.floor(Math.random() * this.allnumber.length);
-      const realinfo = this.allnumber[rand];
+      const rand = Math.floor(Math.random() * this.allcardbot.length);
+      const realinfo = this.allcardbot[rand];
 
-      this.allnumber.splice(rand, 1);
+      this.allcardbot.splice(rand, 1);
       //console.log('random num: ', rand)
-      //console.log('num: ',this.allnumber)
+      //console.log('num: ',this.allcardbot)
 
       this.infobot.cardname[4] = this.allcard.cardname[realinfo];
       this.infobot.cardatk[4] = this.allcard.cardatk[realinfo];

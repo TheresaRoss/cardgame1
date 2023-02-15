@@ -14,7 +14,7 @@
         {{ infotop.cardcost[pos] }}
       </div>
       <div class="flex justify-center bg-white">
-        <h1 class="text-black text-lg bg-white">{{ infotop.cardname[pos] }}</h1>
+        <h1 class="text-black bg-white">{{ infotop.cardname[pos] }}</h1>
       </div>
       <img class="w-[6rem]" :src="infotop.picture[pos]" />
       <div class="flex relative pt-1 bg-white">

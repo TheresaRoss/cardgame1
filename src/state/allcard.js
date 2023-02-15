@@ -5,9 +5,9 @@ export const useAllcard = defineStore({
     id: 'allcard',
     //init state
     state: () => ({
-        cardname: ['PARTY', 'DEUS', 'GUITAR', 'WAR GOD', 'EXODIA'],
-        cardatk: [13, 22, 3, 40, 10 ],
-        cardhp: ['200', '210', '30', '40', '53'],
+        cardname: ['PARTY', 'DEUS', 'GUITAR', 'WAR GOD', 'EXODIA','HOT HEAD'],
+        cardatk: [13, 22, 3, 40, 10,20 ],
+        cardhp: ['200', '210', '30', '40', '53','60'],
         //split string: 
         //1 will be time when it will activate
         //2 will be effect (P = positive,N = negative)
@@ -16,14 +16,16 @@ export const useAllcard = defineStore({
         //5 will be duration
         cardpassive: ['OD P AA Atk 2',
         'OD N AE Atk 2',
-        'OD P AA Pa 3','',''],
+        'OD P AA Pa 3','','',''],
         cardrare: ['N', 'N', 'R', 'R', 'SR'],
-        carddes: ['On deploy, grant all ally in field except the caster Attack buff for 2 turns',
+        carddes: ['On deploy, grant all ally in field Attack buff for 2 turns',
         'On deploy, Decrease atk on all enemy card that is on field',
-        'On deploy, bring a Positive attitude to their allies','','','','','','',''],
-        cardcost: [10,5,8,15,20],
-        picture: ["/src/assets/picture/partyman1.jpg", "/src/assets/picture/hothead.jpg",
-         "/src/assets/picture/catandguitar.jpg", "/src/assets/picture/hothead.jpg", "/src/assets/picture/hothead.jpg"]
+        'On deploy, bring a Positive attitude to their allies','',''
+        ,'On deploy, bring a Negative attitude to all enemy on field','','','',''],
+        cardcost: [10,5,8,15,20,20],
+        picture: ["/src/assets/picture/partyman1.jpg", "/src/assets/picture/hentai.jpg",
+         "/src/assets/picture/catandguitar.jpg", "/src/assets/picture/hentai.jpg",
+         "/src/assets/picture/hentai.jpg", "/src/assets/picture/hotheadman.jpg"]
 
 
 
@@ -54,3 +56,4 @@ export const useAllcard = defineStore({
 //positive attitude (+atk 20% +income 30%)
 //Debuff List
 //decrease atk (-atk 40%)
+//negative attitude (-atk 20% -income 30%)
