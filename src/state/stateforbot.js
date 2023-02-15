@@ -43,12 +43,34 @@ export const useCounterStore = defineStore({
       a= Math.floor(a*1.5)
       this.cardatk[pos] = a.toString()
     },
+    positiveAttitude(pos){
+      let a = parseInt(this.cardatk[pos])
+      a= Math.floor(a*1.2)
+      this.cardatk[pos] = a.toString()
+    },
     //top call 
     decreaseAttack(pos){
       let a = parseInt(this.cardatk[pos])
       a= Math.floor(a*0.7) //decrease by 30%
       this.cardatk[pos] = a.toString()
 
+    },
+
+    //dispel effect
+    dispelIncreaseAtk(pos){
+      this.cardatk[pos] = Math.ceil(
+        (parseInt(this.cardatk[pos]) * 2) / 3
+      );
+    },
+    dispelPositiveAt(pos){
+      this.cardatk[pos] = Math.ceil(
+        (parseInt(this.cardatk[pos]) * 5) / 6
+      );
+    },
+    dispelDecreaseAtk(pos){
+      this.cardatk[pos] = Math.ceil(
+        (parseInt(this.cardatk[pos]) * 10) / 7
+      );
     }
   },
   //getters can return, while actions can't

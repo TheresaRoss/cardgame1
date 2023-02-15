@@ -33,7 +33,7 @@
         <Atkup
           v-bind:class="{
             //on Active style invisible:
-            invisible: !infotop.buff[pos].get('Increaseatk'),
+            hidden: !infotop.buff[pos].get('Increaseatk'),
             visible: infotop.buff[pos].get('Increaseatk'),
           }"
           v-bind:duration="infotop.buff[pos].get('Increaseatk')"
@@ -41,7 +41,7 @@
         <Positiveat
           v-bind:class="{
             //on Active style invisible:
-            invisible: !infotop.buff[pos].get('Positiveattitude'),
+            hidden: !infotop.buff[pos].get('Positiveattitude'),
             visible: infotop.buff[pos].get('Positiveattitude'),
           }"
           v-bind:duration="infotop.buff[pos].get('Positiveattitude')"
@@ -54,7 +54,7 @@
           class="mb-2"
           v-bind:class="{
             //on Active style invisible:
-            invisible: !infotop.debuff[pos].get('Decreaseatk'),
+            hidden: !infotop.debuff[pos].get('Decreaseatk'),
             visible: infotop.debuff[pos].get('Decreaseatk'),
           }"
           v-bind:duration="infotop.debuff[pos].get('Decreaseatk')"

@@ -36,7 +36,7 @@
         <Atkup
           v-bind:class="{
             //on Active style invisible:
-            invisible: !infobot.buff[pos].get('Increaseatk'),
+            hidden: !infobot.buff[pos].get('Increaseatk'),
             visible: infobot.buff[pos].get('Increaseatk'),
           }"
           v-bind:duration="infobot.buff[pos].get('Increaseatk')"
@@ -44,7 +44,7 @@
         <Positiveat
           v-bind:class="{
             //on Active style invisible:
-            invisible: !infobot.buff[pos].get('Positiveattitude'),
+            hidden: !infobot.buff[pos].get('Positiveattitude'),
             visible: infobot.buff[pos].get('Positiveattitude'),
           }"
           v-bind:duration="infobot.buff[pos].get('Positiveattitude')"
@@ -57,7 +57,7 @@
           class="mb-2"
           v-bind:class="{
             //on Active style invisible:
-            invisible: !infobot.debuff[pos].get('Decreaseatk'),
+            hidden: !infobot.debuff[pos].get('Decreaseatk'),
             visible: infobot.debuff[pos].get('Decreaseatk'),
           }"
           v-bind:duration="infobot.debuff[pos].get('Decreaseatk')"
@@ -79,5 +79,7 @@ export default {
   props: {
     pos: String,
   },
+
+  methods: {},
 };
 </script>

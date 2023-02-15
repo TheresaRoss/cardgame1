@@ -573,6 +573,8 @@ export default defineComponent({
               //prevent from buff nonexistent card
               // in case this card already have a buff
               this.infobot.buff[i].set("Positiveattitude", parseInt(data[4]));
+
+              this.infobot.positiveAttitude(i);
             } else {
               if (this.infobot.buff[i]["Positiveattitude"] < 3) {
                 this.infobot.buff[i].set("Positiveattitude", parseInt(data[4]));
@@ -836,6 +838,7 @@ export default defineComponent({
               //prevent from buff nonexistent card
               // in case this card already have a buff
               this.infotop.buff[i].set("Positiveattitude", parseInt(data[4]));
+              this.infotop.positiveAttitude(i);
             } else {
               if (this.infotop.buff[i]["Positiveattitude"] < 3) {
                 this.infotop.buff[i].set("Positiveattitude", parseInt(data[4]));
@@ -1091,11 +1094,12 @@ export default defineComponent({
           if (value === 1) {
             if (key === "Increaseatk") {
               //reverse effect
-              this.infotop.cardatk[i] = Math.ceil(
-                (parseInt(this.infotop.cardatk[i]) * 2) / 3
-              );
+              this.infotop.dispelIncreaseAtk(i);
+
               this.infotop.buff[i].delete(key);
             } else if (key === "Positiveattitude") {
+              this.infotop.dispelPositiveAt(i);
+
               this.infotop.buff[i].delete(key);
             }
           }
@@ -1110,9 +1114,8 @@ export default defineComponent({
           if (value === 1) {
             if (key === "Decreaseatk") {
               //reverse effect
-              this.infotop.cardatk[i] = Math.ceil(
-                (parseInt(this.infotop.cardatk[i]) * 10) / 7
-              );
+              this.infotop.dispelDecreaseAtk(i);
+
               this.infotop.debuff[i].delete(key);
             }
           }
@@ -1136,14 +1139,15 @@ export default defineComponent({
 
           if (value === 1) {
             if (key === "Increaseatk") {
-              this.infobot.cardatk[i] = Math.ceil(
-                (parseInt(this.infobot.cardatk[i]) * 2) / 3
-              );
+              this.infobot.dispelIncreaseAtk(i);
+
               this.infobot.buff[i].delete(key);
             }
           }
 
           if (key === "Positiveattitude") {
+            this.infobot.dispelPositiveAt(i);
+
             this.infobot.buff[i].delete(key);
           }
         }
@@ -1157,9 +1161,8 @@ export default defineComponent({
           if (value === 1) {
             if (key === "Decreaseatk") {
               //reverse effect
-              this.infobot.cardatk[i] = Math.ceil(
-                (parseInt(this.infobot.cardatk[i]) * 10) / 7
-              );
+              this.infobot.dispelDecreaseAtk(i);
+
               this.infobot.debuff[i].delete(key);
             }
           }

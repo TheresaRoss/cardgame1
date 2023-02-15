@@ -6,7 +6,7 @@ export const useAllcard = defineStore({
     //init state
     state: () => ({
         cardname: ['PARTY', 'DEUS', 'GUITAR', 'WAR GOD', 'EXODIA'],
-        cardatk: [13, 22, 3, 40, 10],
+        cardatk: [13, 22, 3, 40, 10 ],
         cardhp: ['200', '210', '30', '40', '53'],
         //split string: 
         //1 will be time when it will activate
@@ -48,3 +48,9 @@ export const useAllcard = defineStore({
         }
     }
 })
+
+//Buff List 
+//increase atk ( +atk 50% )
+//positive attitude (+atk 20% +income 30%)
+//Debuff List
+//decrease atk (-atk 30%)
