@@ -407,6 +407,7 @@ export default defineComponent({
                 default:
                   break;
               }
+              this.onDeploybuffselfbot(detailP, 9);
 
               //have on deploy effect
 
@@ -443,6 +444,7 @@ export default defineComponent({
               default:
                 break;
             }
+            this.onDeploybuffselfbot(detailP, 8);
 
             this.activeCard4 = Cardbase;
             return;
@@ -478,6 +480,7 @@ export default defineComponent({
             default:
               break;
           }
+          this.onDeploybuffselfbot(detailP, 7);
 
           this.activeCard3 = Cardbase;
           return;
@@ -513,6 +516,7 @@ export default defineComponent({
           default:
             break;
         }
+        this.onDeploybuffselfbot(detailP, 6);
 
         this.activeCard2 = Cardbase;
         return;
@@ -548,9 +552,39 @@ export default defineComponent({
         default:
           break;
       }
+      this.onDeploybuffselfbot(detailP, 5);
 
       this.activeCard1 = Cardbase;
       return;
+    },
+    onDeploybuffselfbot(data, pos) {
+      if (data[2] === "AA") {
+        if (data[3] === "Atk") {
+          if (!this.infobot.buff[pos]["Increaseatk"]) {
+            //prevent from buff nonexistent card
+            // in case this card already have a buff
+            this.infobot.buff[pos].set("Increaseatk", parseInt(data[4]));
+
+            this.infobot.increaseAttack(pos);
+          } else {
+            if (this.infobot.buff[pos]["Increaseatk"] < 2) {
+              this.infobot.buff[pos].set("Increaseatk", parseInt(data[4]));
+            }
+          }
+        } else if (data[3] === "Pa") {
+          if (!this.infobot.buff[pos]["Positiveattitude"]) {
+            //prevent from buff nonexistent card
+            // in case this card already have a buff
+            this.infobot.buff[pos].set("Positiveattitude", parseInt(data[4]));
+
+            this.infobot.positiveAttitude(pos);
+          } else {
+            if (this.infobot.buff[pos]["Positiveattitude"] < 3) {
+              this.infobot.buff[pos].set("Positiveattitude", parseInt(data[4]));
+            }
+          }
+        }
+      }
     },
 
     onDeploybuffbot(data) {
@@ -681,6 +715,7 @@ export default defineComponent({
                 default:
                   break;
               }
+              this.onDeploybuffselftop(detailP, 9);
 
               this.activetopCard5 = Cardbase2;
               return;
@@ -715,6 +750,7 @@ export default defineComponent({
               default:
                 break;
             }
+            this.onDeploybuffselftop(detailP, 8);
 
             this.activetopCard4 = Cardbase2;
             return;
@@ -749,6 +785,7 @@ export default defineComponent({
             default:
               break;
           }
+          this.onDeploybuffselftop(detailP, 7);
 
           this.activetopCard3 = Cardbase2;
           return;
@@ -783,6 +820,7 @@ export default defineComponent({
           default:
             break;
         }
+        this.onDeploybuffselftop(detailP, 6);
 
         this.activetopCard2 = Cardbase2;
         return;
@@ -820,9 +858,39 @@ export default defineComponent({
         default:
           break;
       }
+      this.onDeploybuffselftop(detailP, 5);
 
       this.activetopCard1 = Cardbase2;
       return;
+    },
+    onDeploybuffselftop(data, pos) {
+      if (data[2] === "AA") {
+        if (data[3] === "Atk") {
+          if (!this.infotop.buff[pos]["Increaseatk"]) {
+            //prevent from buff nonexistent card
+            // in case this card already have a buff
+            this.infotop.buff[pos].set("Increaseatk", parseInt(data[4]));
+
+            this.infotop.increaseAttack(pos);
+          } else {
+            if (this.infotop.buff[pos]["Increaseatk"] < 2) {
+              this.infotop.buff[pos].set("Increaseatk", parseInt(data[4]));
+            }
+          }
+        } else if (data[3] === "Pa") {
+          if (!this.infotop.buff[pos]["Positiveattitude"]) {
+            //prevent from buff nonexistent card
+            // in case this card already have a buff
+            this.infotop.buff[pos].set("Positiveattitude", parseInt(data[4]));
+
+            this.infotop.positiveAttitude(pos);
+          } else {
+            if (this.infotop.buff[pos]["Positiveattitude"] < 3) {
+              this.infotop.buff[pos].set("Positiveattitude", parseInt(data[4]));
+            }
+          }
+        }
+      }
     },
     onDeploybufftop(data) {
       var sound1 = new Audio("/src/assets/sound/buff/buff.mp3");
